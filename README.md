@@ -9,4 +9,3 @@ About project
 
 This application contains simple demonstration of my quideliness for PHP enterprise grade projects.
 
-
