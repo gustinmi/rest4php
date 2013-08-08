@@ -6,18 +6,19 @@ require('Bootstrap.php');
 //if you map all requests to index.php, you can start your routing (MVC) from here.
 
 
+function ExecuteAction ( $ControllerName, $ActionName, $Parameters = Array () ) {
+    $controller = new $ControllerName ();
+    $ActionName .= 'Action';
 
-public function ExecuteAction ( $ControllerName, $ActionName, $Parameters = Array () )
-	{
-		$controller = new $ControllerName ();
-		$ActionName .= 'Action';
+    if ( $Parameters == null )
+        $Parameters = Array ();
 
-		if ( $Parameters == null )
-			$Parameters = Array ();
-
-		return Call_User_Func_Array ( Array ( $controller, $ActionName ), $Parameters );
-	}
+    return Call_User_Func_Array ( Array ( $controller, $ActionName ), $Parameters );
+}
 
 
-$foo = new \model\Foo();
+ExecuteAction('Folder','Get', NULL);
+
+
+//$foo = new \model\Foo();
 

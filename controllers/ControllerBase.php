@@ -4,12 +4,12 @@ namespace controllers;
 
 abstract class ControllerBase {
 
-	protected $answer;
+	protected $serialOut;
 
 	public function __construct() {
-		$answer = array();
-		$answer['status'] = 'ok';
-		$answer['data'] = array();
+		$this->serialOut = array();
+        $this->serialOut['status'] = 'err';
+        $this->serialOut['data'] = array();
 	}
 
 	public abstract function Put($items);

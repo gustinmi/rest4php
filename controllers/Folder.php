@@ -29,7 +29,7 @@ class Folder extends ControllerBase {
 	// replace
 	public function Put($newitems){
         if (!isset($newitems)) throw new Exception('Empty args');
-		$result = is_array($newitems ? $this->model->updateAll($newitems) : $this->model->updateById($newitems);
+		$result = is_array($newitems) ? $this->model->updateAll($newitems) : $this->model->updateById($newitems);
 		$this->renderResponse($result);
 	}
 
