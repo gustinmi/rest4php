@@ -12,11 +12,11 @@ abstract class ControllerBase {
         $this->serialOut['data'] = array();
 	}
 
-	public abstract function Put($items);
+	public abstract function Update($items);
 	
-	public abstract function Get($id);
+	public abstract function Read($id);
 	
-	public abstract function Post($new);
+	public abstract function Create($new);
 
 	public abstract function Delete($ids);
 
