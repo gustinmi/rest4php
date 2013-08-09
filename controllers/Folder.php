@@ -16,12 +16,13 @@ class Folder extends ControllerBase {
 			$answer['data'] = $result;
 			$answer['status'] = 'ok';
 		} 
-		header("Content-Type: text/json; charset=utf-8");
+		//header("Content-Type: text/json; charset=utf-8");
     	echo json_encode($result);
 	}
 
 	// retrieve
-	public function Get($id){
+	public function Get($id=NULL){
+        echo __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n";
 		$result = isset($id) ? $this->model->getById($id) : $this->model->getAll();
 		$this->renderResponse($result);
 	}

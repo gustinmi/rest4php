@@ -10,6 +10,7 @@ class Folder {
     }
 
 	public function getById($id){
+        echo __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n";
 		$r = mysql_query("SELECT  id, name FROM folders where id = $id");
     	if (!$r) throw new Exception('SQL SELECT failed');
     	$result = array();
@@ -19,9 +20,11 @@ class Folder {
 	        array_push($el, $row[1]);
 	        array_push($result, $el);
 	    }
+        return $result;
 	}
 
 	public function getAll(){
+        echo __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n";
 		$r = mysql_query("SELECT  id, name FROM folders");
     	if (!$r) throw new Exception('SQL SELECT failed');
     	$result = array();
@@ -31,6 +34,7 @@ class Folder {
 	        array_push($el, $row[1]);
 	        array_push($result, $el);
 	    }
+        return $result;
 	} 	
 		
 	public function updateById($newItem){
