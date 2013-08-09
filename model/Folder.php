@@ -6,7 +6,7 @@ class Folder {
 
     function __construct()
     {
-        include( "mysql.php" );
+
     }
 
 	public function getById($id){

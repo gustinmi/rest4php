@@ -11,13 +11,6 @@
 // require or include directives.
 require('Bootstrap.php');
 
-function logm($msg){
-    if (php_sapi_name() == 'cli')
-        echo $msg;
-    else
-        error_log("\n $msg");
-}
-
 
 /** This should be called by router. All URLs should be mapped to index.php.
  * @param $ControllerName

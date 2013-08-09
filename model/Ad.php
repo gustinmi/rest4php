@@ -6,7 +6,7 @@ class Ad {
 
     function __construct()
     {
-        include( "mysql.php" );
+
     }
 
     public function read($args){
