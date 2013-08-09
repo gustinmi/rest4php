@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-abstract class ControllerBase {
+abstract class Controller {
 
 	protected $serialOut;
 
@@ -12,7 +12,15 @@ abstract class ControllerBase {
         $this->serialOut['data'] = array();
 	}
 
-	public abstract function Update($items);
+    protected function renderResponse($result) {
+        if (isset($result)){
+            $this->serialOut['data'] = $result;
+            $this->serialOut['status'] = 'ok';
+        }
+        return json_encode($this->serialOut);
+    }
+
+    public abstract function Update($items);
 	
 	public abstract function Read($id);
 	

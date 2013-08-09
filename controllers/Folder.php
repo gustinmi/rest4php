@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-class Folder extends ControllerBase {
+class Folder extends Controller {
 	
 	protected $model;
 
@@ -10,14 +10,6 @@ class Folder extends ControllerBase {
         parent::__construct();
         $this->model = new \model\Folder();
     }
-
-	protected function renderResponse($result) {
-		if (isset($result)){
-			$this->serialOut['data'] = $result;
-            $this->serialOut['status'] = 'ok';
-		} 
-    	return json_encode($this->serialOut);
-	}
 
 	// retrieve
 	public function Read($id=NULL){
