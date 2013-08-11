@@ -8,10 +8,10 @@ class Queries extends Controller {
         parent::__construct();
     }
 
-    public function get($args){
+    public function q($args){
         logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         $qPart = is_array($args) && array_key_exists('query', $args) ? $args['query'] : NULL;
-        $q = "SELECT id, name FROM $qPart";
+        $q = "SELECT id, name $qPart";
         $r = mysql_query($q);
         if (!$r) die ('SQL SELECT failed' . $q);
         $result = array();

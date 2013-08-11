@@ -17,7 +17,7 @@ php_sapi_name() == 'cli' ? $handler = strtolower($argv[1]) : $handler = strtolow
 $routes = array(
     '/\/api\/(get|set|delete|create)\/folder\/([0-9]*)/' => array('controller'=>'Folder'),
     '/\/api\/(get|set|delete|create)\/ad\/([0-9]*)/' => array('controller'=>'Ads'),
-    '/\/api\/(q)\/folders\/([0-9]*)\/ads/' => array('controller'=>'Queries', 'query'=>'from ads where folder id = '),
+    '/\/api\/(q)\/folder\/([0-9]*)\/ad/' => array('controller'=>'Queries', 'query'=>'from ads where folder_id = '),
 );
 
 //dispatcher
@@ -38,11 +38,15 @@ foreach (array_keys($routes) as $key){
                 $params = $put_vars;
                 break;
             case 'q':
+                echo 'in q';
                 $params = array('query'=> $routes[$key]['query'] . $specifier );
                 break;
         }
         $controllerName = '\\controllers\\' . ucfirst($controller);
         $controller = new $controllerName();
+
+        echo $params;
+
         $response = Call_User_Func(Array($controller, $request_method), $params);
         break;
     }
