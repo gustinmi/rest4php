@@ -14,8 +14,12 @@ possible to use it ony any hosting site that supports php5.
 Configuration
 --------------------------------------
 
-1. Execute db_create.sql
-2. Edit config/constans.dev(elopment) or prod(uction)
+1. Execute db_create.sql on your MySql instance
+
+    mysql -u root -p < db_create.sql
+
+2. Edit config/constans.dev(elopment) or prod(uction) to fit your database.
+
 3. Create a symlink constants.php pointing to one of the above ones
 
 Launch application
@@ -25,9 +29,11 @@ Launch application
 
 2. Add following directives to apache <directory YOUR_APP<
 
-    RewriteEngine On
-    RewriteCond %{REQUEST_URI} !(.*)\.(css|js|htc|pdf|jpg|jpeg|gif|png|ico)$ [NC]
-    RewriteRule ^(.*)$ index.php?handler=$1 [QSA,L]
+    <Directory /var/www/php2e>
+        RewriteEngine On
+        RewriteCond %{REQUEST_URI} !(.*)\.(css|js|htc|pdf|jpg|jpeg|gif|png|ico)$ [NC]
+        RewriteRule ^(.*)$ index.php?handler=$1 [QSA,L]
+    </Directory>
 
 3. Invoke application. Examples:
  - http://localhost/api/read/folder

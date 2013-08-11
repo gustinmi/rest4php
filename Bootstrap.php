@@ -16,7 +16,7 @@ class Bootstrap {
 
     public static function AutoLoad ( $ClassName )
     {
-        echo $ClassName . "\r\n";
+        //echo($ClassName . "\r\n");
         Require ( str_replace('\\', '/', $ClassName ) . '.php' );
     }
 }

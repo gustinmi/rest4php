@@ -7,63 +7,44 @@
 // We map all requests to index.php, so this is central point (Front Controller)
 //********************************
 
-// Bootstrap provides auto_load function implementation. We can now instantiate classes without using
-// require or include directives.
+// Auto_load implementation, include commons
 require('Bootstrap.php');
-
-
-/** This should be called by router. All URLs should be mapped to index.php.
- * @param $ControllerName
- * @param $ActionName
- * @param array $Parameters
- * @return mixed
- */
-function Dispatch($ControllerName, $ActionName, $Parameters = Array()) {
-    $controller = new $ControllerName();
-    return Call_User_Func_Array(Array($controller, $ActionName), $Parameters);
-}
 
 //if CLI context, pass required paramaters as CMD arguments
 php_sapi_name() == 'cli' ? $handler = strtolower($argv[1]) : $handler = strtolower($_REQUEST['handler']);
 
-/* URL REWRITING
+//predefined REST API ROUTES
+$routes = array(
+    '/\/api\/(get|set|delete|create)\/folder\/([0-9]*)/' => array('controller'=>'Folder'),
+    '/\/api\/(get|set|delete|create)\/ad\/([0-9]*)/' => array('controller'=>'Ads'),
+    '/\/api\/(q)\/folders\/([0-9]*)\/ads/' => array('controller'=>'Queries'),
+);
 
-Apache directive
-
-    RewriteEngine On
-    RewriteCond %{REQUEST_URI} !(.*)\.(css|js|htc|pdf|jpg|jpeg|gif|png|ico)$ [NC]
-    RewriteRule ^(.*)$ index.php?handler=$1 [QSA,L]
-
-Examples
-
- http://localhost/api/read/user/87  will become  http://localhost/api/index.php?handler=read/user/87
-
- http://localhost/api/read/user/87
- http://localhost/api/delete/user/87
- http://localhost/api/update/user/87
- http://localhost/api/create/user/
-
-*/
-
-// get/folders/1/items/
-
-$tokens = explode("/", $handler);
-
-$action = array_key_exists(0, $tokens) ? $tokens[0] : NULL;
-$domain = array_key_exists(1, $tokens) ? $tokens[1] : NULL;
-
-if (preg_match("/^[a-zA-Z]+$/", $domain) != 1) throw new Exception("The $domain type was not specified as latin word");
-
-$denominator = array_key_exists(2, $tokens) ? $tokens[2] : NULL;
-if (isset($denominator) && preg_match("/^[0123456789]+$/", $denominator) != 1) throw new Exception("The $denominator type was not specified as an integer");
-
-$subdomain = array_key_exists(3, $tokens) ? $tokens[3] : NULL;
-if (isset($subdomain) && preg_match("/^[a-zA-Z]+$/", $subdomain) != 1) throw new Exception("The $subdomain type was not specified as latin word");
-
-$subdenominator = array_key_exists(4, $tokens) ? $tokens[4] : NULL;
-if (isset($subdenominator) && preg_match("/^[0123456789]+$/", $denominator) != 1) throw new Exception("The $denominator type was not specified as an integer");
-
-$response = Dispatch('\\controllers\\' . ucfirst($domain), $action, ['denominator'=>$denominator, 'subdomain'=>$subdomain, 'subdenominator'=>$subdenominator ]);
+//dispatcher
+foreach (array_keys($routes) as $key){
+    if (preg_match($key, $handler, $matches, PREG_OFFSET_CAPTURE)){
+        $request_method = $matches[1][0];
+        $specifier = $matches[2][0];
+        $controller = $routes[$key]['controller'];
+        switch ($request_method)
+        {
+            case 'get':
+            case 'delete':
+                $params =  empty($specifier) ? array() : array('id'=>$specifier);
+                break;
+            case 'set':
+            case 'create':
+                //$data = $_POST;
+                parse_str(file_get_contents('php://input'), $put_vars);
+                $params = $put_vars;
+                break;
+        }
+        $controllerName = '\\controllers\\' . ucfirst($controller);
+        $controller = new $controllerName();
+        $response = Call_User_Func(Array($controller, $request_method), $params);
+        break;
+    }
+}
 
 //if we are running this in server environment, render HTTP headers
 if (php_sapi_name() != 'cli')
