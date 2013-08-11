@@ -33,9 +33,8 @@ foreach (array_keys($routes) as $key){
                 break;
             case 'set':
             case 'create':
-                //$data = $_POST;
-                parse_str(file_get_contents('php://input'), $put_vars);
-                $params = $put_vars;
+                $raw = file_get_contents('php://input');
+                $params = json_decode($raw,true);
                 break;
             case 'q':
                 echo 'in q';
@@ -44,9 +43,6 @@ foreach (array_keys($routes) as $key){
         }
         $controllerName = '\\controllers\\' . ucfirst($controller);
         $controller = new $controllerName();
-
-        echo $params;
-
         $response = Call_User_Func(Array($controller, $request_method), $params);
         break;
     }

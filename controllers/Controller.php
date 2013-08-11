@@ -20,4 +20,10 @@ abstract class Controller {
         return json_encode($this->serialOut);
     }
 
+    protected function renderError($msg) {
+        $this->serialOut['data'] = $msg;
+        $this->serialOut['status'] = 'err';
+        return json_encode($this->serialOut);
+    }
+
 }

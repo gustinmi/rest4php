@@ -27,14 +27,24 @@ class Folder extends Controller implements ICrud {
 
 	// replace
 	public function set($args){
-        //TODO implement this
-		return $this->renderResponse(array());
+        if (array_key_exists('id',$args) && array_key_exists('name',$args)){
+            extract($args);
+            $q = "UPDATE folders SET name = $name WHERE id = $id";
+            $result = mysql_query($q);
+        }
+
+        return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
 	}
 
 	// create new
 	public function create($args){
-        //TODO implement this
-		return $this->renderResponse(array());
+        if (array_key_exists('name',$args)){
+            extract($args);
+            $q = "INSERT INTO folders VALUES ($name)";
+            $result = mysql_query($q);
+        }
+
+        return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
 	}
 
 	// delete
