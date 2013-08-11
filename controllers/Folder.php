@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-class Folder extends Controller {
+class Folder extends Controller implements ICrud {
 
     public function __construct() {
         parent::__construct();
@@ -26,24 +26,23 @@ class Folder extends Controller {
 	}
 
 	// replace
-	public function set($newitems){
-        if (!isset($newitems)) throw new Exception('Empty args');
-		$result = is_array($newitems) ? $this->model->updateAll($newitems) : $this->model->updateById($newitems);
-		return $this->renderResponse($result);
+	public function set($args){
+        //TODO implement this
+		return $this->renderResponse(array());
 	}
 
 	// create new
-	public function Create($newItem){
-        if (!isset($newItem)) throw new Exception('Empty args');
-		$result = $this->model->createNew($newItem);
-		return $this->renderResponse($result);
+	public function create($args){
+        //TODO implement this
+		return $this->renderResponse(array());
 	}
 
 	// delete
-	public function Delete($ids){
-        if (!isset($ids)) throw new Exception('Empty args');
-		$result = is_array($ids) ? $this->model->deleteAll($ids) : $this->model->deleteById($ids);
-		return $this->renderResponse($result);
+	public function delete($args){
+        $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
+        $q = "DELETE FROM folders where id = $id";
+        mysql_query($q);
+		return $this->renderResponse(array());
 	}
 		
 

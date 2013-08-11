@@ -20,12 +20,4 @@ abstract class Controller {
         return json_encode($this->serialOut);
     }
 
-    public abstract function set($items);
-	
-	public abstract function get($id);
-	
-	public abstract function create($new);
-
-	public abstract function delete($ids);
-
 }
