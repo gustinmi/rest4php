@@ -1,0 +1,15 @@
+#IDEA ide
+.idea
+*.iml
+
+# logs
+logs
+
+# vim
+.*.swp
+.*.swo
+
+# temp files
+*~
+*.tmp
+test.php

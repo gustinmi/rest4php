@@ -5,9 +5,8 @@ class Bootstrap {
     function __construct()
     {
         //This is a SYM link. It will work only on linux
-        //Require ( 'appconfig.php' );
-
         include("constants.php");
+
         include("common.php");
         include( "mysql.php" );
 
