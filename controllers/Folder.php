@@ -29,10 +29,9 @@ class Folder extends Controller implements ICrud {
 	public function set($args){
         if (array_key_exists('id',$args) && array_key_exists('name',$args)){
             extract($args);
-            $q = "UPDATE folders SET name = $name WHERE id = $id";
+            $q = "UPDATE folders SET name = '$name' WHERE id = $id";
             $result = mysql_query($q);
         }
-
         return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
 	}
 
@@ -40,7 +39,8 @@ class Folder extends Controller implements ICrud {
 	public function create($args){
         if (array_key_exists('name',$args)){
             extract($args);
-            $q = "INSERT INTO folders VALUES ($name)";
+            $q = "INSERT INTO folders VALUES (NULL, '$name')";
+            logm($q);
             $result = mysql_query($q);
         }
 
