@@ -26,12 +26,13 @@ Configuration
 4. Create a symlink in your apache htdocs folder pointing to these application's root folder.
 
 5. Add following directives to apache directory entry
-
-    <Directory /var/www/php2e>
+    <pre><code>
+    &lt;Directory /var/www/php2e&gt;
         RewriteEngine On
         RewriteCond %{REQUEST_URI} !(.*)\.(css|js|htc|pdf|jpg|jpeg|gif|png|ico)$ [NC]
         RewriteRule ^(.*)$ index.php?handler=$1 [QSA,L]
-    </Directory>
+    &lt;/Directory&gt;
+    </pre></code>
 
 Launch application
 --------------------------------------
