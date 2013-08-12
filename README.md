@@ -1,8 +1,7 @@
-PHP Enterprise Application
+PHP REST API Minimalistic
 =========
 
-Minimalistic PHP Enterprise application, basis for any REST JSON API web service. Serves as accompanying guide to my document php 4 enterprise.
-The application is a basic REST web service, with some minimalistic MVC pattern on the server side. It serves data in JSON format.
+Minimalistic PHP REST API application. The application is a basic REST web service, with some minimalistic dispatcher pattern on the server side. It serves data in JSON format.
 
 About project
 --------------------------------------
@@ -43,9 +42,11 @@ Launch application
  http://localhost/api/ [read | delete | update | create]
 
 
-The application can be started via CLI also. For example:
+The application can be tested  via CLI also. For example:
 
-php -f index.php read/folder
+php -f index.php /get/folder/ad
+
+Or via curl (for post requests).
 
 
 Application components
