@@ -25,7 +25,7 @@ Configuration
 
 4. Create a symlink in your apache htdocs folder pointing to these application's root folder.
 
-5. Add following directives to apache <directory YOUR_APP<
+5. Add following directives to apache directory entry
 
     <Directory /var/www/php2e>
         RewriteEngine On
