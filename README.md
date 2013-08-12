@@ -23,11 +23,11 @@ Configuration
     ln -s config/constants.dev.php constants.php
 
 
-4. Create a symlink in your apache htdocs folder pointing to these application's root folder.
+4. Create a symlink in your apache htdocs folder pointing to these application's root folder php4rest.
 
 5. Add following directives to apache directory entry
     <pre><code>
-    &lt;Directory /var/www/php2e&gt;
+    &lt;Directory /var/www/php4rest&gt;
         RewriteEngine On
         RewriteCond %{REQUEST_URI} !(.*)\.(css|js|htc|pdf|jpg|jpeg|gif|png|ico)$ [NC]
         RewriteRule ^(.*)$ index.php?handler=$1 [QSA,L]
@@ -39,9 +39,9 @@ Launch application
 
 To test application you can use your browser and navigate to
 
- - http://localhost/YOUR_APP/api/get/folder
- - http://localhost/YOUR_APP/api/get/folder/1
- - http://localhost/YOUR_APP/api/get/folder/1/ad
+ - http://localhost/php4rest/api/get/folder
+ - http://localhost/php4rest/api/get/folder/1
+ - http://localhost/php4rest/api/get/folder/1/ad
 
 To test full application, use CURL like this:
 
@@ -49,20 +49,20 @@ This are sample CURL request for testing the REST API
 
 1) Read element
 
-    curl 'http://localhost/php2e/api/get/folder/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
-    curl 'http://localhost/php2e/api/get/folder/1/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
+    curl 'http://localhost/php4rest/api/get/folder/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
+    curl 'http://localhost/php4rest/api/get/folder/1/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
 
 2) Delete element
 
-    curl 'http://localhost/php2e/api/delete/folder/1/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
+    curl 'http://localhost/php4rest/api/delete/folder/1/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
 
 3) Update element
 
-    curl 'http://localhost/php2e/api/set/folder' -H 'Origin: http://localhost' -H 'Host: localhost' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"id":5,"name":"test 1"}' --compressed
+    curl 'http://localhost/php4rest/api/set/folder' -H 'Origin: http://localhost' -H 'Host: localhost' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"id":5,"name":"test 1"}' --compressed
 
 4) Insert element
 
-    curl 'http://localhost/php2e/api/create/folder' -H 'Origin: http://localhost' -H 'Host: localhost' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"name":"test new"}' --compressed
+    curl 'http://localhost/php4rest/api/create/folder' -H 'Origin: http://localhost' -H 'Host: localhost' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"name":"test new"}' --compressed
 
 Application arhitecture and components
 --------------------------------------
