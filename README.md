@@ -1,14 +1,15 @@
-PHP REST API Minimalistic
+PHP RESTful API Simple Minimalistic
 =========
 
-Minimalistic PHP REST API application. The application is a basic REST web service, with some minimalistic dispatcher pattern on the server side. It serves data in JSON format.
+PHP RESTful API example using built-in PHP OOP. Simple and minimalistic RESTful web service, with FrontController pattern,
+simple RegExp customizable router and JSON renderer. Web service serves data in JSON format, and offers CRUD operations
+on model behind.
 
 About project
 --------------------------------------
 
-This application contains simple demonstration of my quideliness for PHP enterprise grade projects. It contains no frameworks so its
-possible to use it ony any hosting site that supports php5.
-
+This application contains simple demonstration of my quideliness for PHP enterprise grade projects.
+It contains no frameworks so its possible to use it on any hosting site that supports php5.
 
 Configuration
 --------------------------------------
