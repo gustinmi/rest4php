@@ -1,4 +1,4 @@
-PHP RESTful API Simple Minimalistic
+PHP RESTful API with CRUD operations support
 =========
 
 PHP RESTful API example using built-in PHP OOP. Simple and minimalistic RESTful web service, with FrontController pattern,
