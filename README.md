@@ -68,20 +68,20 @@ This are sample CURL request for testing the REST API
 
 1) Read element
 
-    curl 'http://http://rest4php.mitjagustin.si/api/get/folder/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
-    curl 'http://rest4php.mitjagustin.si/api/get/folder/1/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
+    curl 'http://rest4php.mitjagustin.si/api/get/folder/' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' --compressed
+    curl 'http://rest4php.mitjagustin.si/api/get/folder/1' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' --compressed
 
 2) Delete element
 
-    curl 'http://rest4php.mitjagustin.si/api/delete/folder/1/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
+    curl 'http://rest4php.mitjagustin.si/api/delete/folder/9' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' --compressed
 
 3) Update element
 
-    curl 'http://rest4php.mitjagustin.si/api/set/folder' -H 'Origin: http://localhost' -H 'Host: localhost' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"id":5,"name":"test 1"}' --compressed
+    curl 'http://rest4php.mitjagustin.si/api/set/folder/' -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"id":8,"name":"testing 1"}' --compressed
 
 4) Insert element
 
-    curl 'http://rest4php.mitjagustin.si/api/create/folder' -H 'Origin: http://localhost' -H 'Host: localhost' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"name":"test new"}' --compressed
+    curl 'http://rest4php.mitjagustin.si/api/create/folder/' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"name":"test new"}' --compressed
 
 Application arhitecture and components
 --------------------------------------
