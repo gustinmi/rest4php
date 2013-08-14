@@ -37,7 +37,6 @@ foreach (array_keys($routes) as $key){
                 $params = json_decode($raw,true);
                 break;
             case 'q':
-                echo 'in q';
                 $params = array('query'=> $routes[$key]['query'] . $specifier );
                 break;
         }
