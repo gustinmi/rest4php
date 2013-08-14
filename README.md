@@ -83,10 +83,10 @@ This are sample CURL request for testing the REST API
 
     curl 'http://rest4php.mitjagustin.si/api/create/folder/' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"name":"test new"}' --compressed
 
-Application arhitecture and components
+Application arhitecture decisions
 --------------------------------------
 
-Error logging
+1) Error logging
 
 With cli we can use echo php directive. However with server we cannot, or we will get our loig messages in JSON response.
 We use error_log() function, which is reserved for apache.
@@ -95,11 +95,26 @@ We can see our log statements by :
 
     tail -f error.log | egrep '\[error\]'
 
-Configuration
+2) Configuration
 
 Normally the main demand for configuration is ability to swtich between different environments (development, staging, production).
 The sofisticated configuration frameworks provide this utility among many others. However in order to use what build-in php functionality provide,
 we use simple solution with symlink. So for the proper configuration file to be used, simple create a proper symlink.
+
+3) PHP5 Autoloader
+
+Please see my document : http://mitjagustin.si/2013/05/14/php-autoloader-require-and-include-explained/
+
+4) Encapsulate code that needs to be run in web context
+
+To achieve good testability and independence of running in web context, code encapsulates all stuff that uses that web context parameters. There is also a alternate way to provide such a information via CLI arguments.
+
+
+
+
+
+
+
 
 
 
