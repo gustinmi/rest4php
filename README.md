@@ -8,25 +8,42 @@ on model behind.
 About project
 --------------------------------------
 
-This application contains simple demonstration of my quideliness for PHP enterprise grade projects.
-It contains no frameworks so its possible to use it on any hosting site that supports php5.
+This application contains most simplistic demonstration on how to create a RESful API with support for CRUD operations.
+The code is on my humble opinion in enterprise grade. Further more, whole codebase contains no special frameworks so it's possible to use it on any hosting site that supports php5.
+
+The RESTful API operates on 2 entitites, namely Folder and Ad (or item). They are in 1 .. * relation, like folders and files on 
+your local harddrive. One folder contains many items (or files).
+
+RESTful operations supported are
+
+1. get  (read operations, uses a HTTP GET. We determine requested entity via URL matching)
+2. delete (delete operation. Same as before)
+2. set (update operation. The data is posted to server as a RAW HTTP POST request)
+4. create (same as above)
+
+To provide unified API for client, all server communication (messages) take following format. 
+
+    {
+	    "status":"[ok|err]",
+	    "data":[ARRAY]
+    }
 
 Configuration
 --------------------------------------
 
-1. Execute db_create.sql on your MySql instance
+1. Execute db_create.sql on your MySql instance to create table structure and some test data.
 
     mysql -u root -p < db_create.sql
 
 2. Edit config/constans.dev(elopment) or prod(uction) to fit your database.
 
-3. Create a symlink constants.php pointing to one of the above ones
+3. Edit / Create a symlink named '''constants.php''' pointing to one of the above mentioned files
+    
     ln -s config/constants.dev.php constants.php
-
 
 4. Create a symlink rest4php in your apache htdocs folder pointing to these application's root folder php4rest.
 
-5. Add following directives to apache directory entry
+5. If your apache instance does not support .htaccess files, add following directives to apache site configuration file 
     <pre><code>
     &lt;Directory /var/www/rest4php&gt;
         RewriteEngine On
@@ -35,35 +52,36 @@ Configuration
     &lt;/Directory&gt;
     </pre></code>
 
-Launch application
+Test application
 --------------------------------------
 
-To test application you can use your browser and navigate to
+To quckly test application (only read operations) you can use your browser and navigate to
 
- - http://localhost/rest4php/api/get/folder
- - http://localhost/prest4php/api/get/folder/1
- - http://localhost/rest4php/api/get/folder/1/ad
+ - http://[SERVER_NAME]/rest4php/api/get/folder
+ - http://[SERVER_NAME]/prest4php/api/get/folder/1
+ - http://[SERVER_NAME]/rest4php/api/get/folder/1/ad
 
-To test full application, use CURL like this:
+
+To fully test application, use CURL and make rerquests like this:
 
 This are sample CURL request for testing the REST API
 
 1) Read element
 
-    curl 'http://localhost/rest4php/api/get/folder/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
-    curl 'http://localhost/rest4php/api/get/folder/1/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
+    curl 'http://http://rest4php.mitjagustin.si/api/get/folder/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
+    curl 'http://rest4php.mitjagustin.si/api/get/folder/1/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
 
 2) Delete element
 
-    curl 'http://localhost/rest4php/api/delete/folder/1/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
+    curl 'http://rest4php.mitjagustin.si/api/delete/folder/1/' -H 'Host: localhost'  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Cache-Control: max-age=0' --compressed
 
 3) Update element
 
-    curl 'http://localhost/rest4php/api/set/folder' -H 'Origin: http://localhost' -H 'Host: localhost' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"id":5,"name":"test 1"}' --compressed
+    curl 'http://rest4php.mitjagustin.si/api/set/folder' -H 'Origin: http://localhost' -H 'Host: localhost' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"id":5,"name":"test 1"}' --compressed
 
 4) Insert element
 
-    curl 'http://localhost/rest4php/api/create/folder' -H 'Origin: http://localhost' -H 'Host: localhost' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"name":"test new"}' --compressed
+    curl 'http://rest4php.mitjagustin.si/api/create/folder' -H 'Origin: http://localhost' -H 'Host: localhost' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"name":"test new"}' --compressed
 
 Application arhitecture and components
 --------------------------------------
