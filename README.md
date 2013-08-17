@@ -110,6 +110,16 @@ Please see my document : http://mitjagustin.si/2013/05/14/php-autoloader-require
 To achieve good testability and independence of running in web context, code encapsulates all stuff that uses that web context parameters. There is also a alternate way to provide such a information via CLI arguments.
 
 
+References
+================================================================
+Raw HTTP request processing sample is taken from here [1].
+
+
+  [1]: http://daringfireball.net/projects/markdown/syntax#autolink        "RESTful API"
+
+
+
+
 
 
 
