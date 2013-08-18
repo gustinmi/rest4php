@@ -33,7 +33,8 @@ window.html5app = {
     html5app.settings.api = {
         'FOLDERS_URL' : 'http://localhost/php2e/api/get/folder/',
         'FOLDERS_ADS_URL':'http://localhost/php2e/api/q/folder/{0}/ad',
-        'AD_URL' : 'http://localhost/php2e/api/get/ad/{0}'
+        'AD_URL' : 'http://localhost/php2e/api/get/ad/{0}',
+        'SAVE_AD' : 'http://localhost/php2e/api/set/ad/'
     };
 
     // translations i18n strings

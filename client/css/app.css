@@ -111,3 +111,36 @@ div.preview > * {
 .editor {
     background: #ccc
 }
+
+/* fency buttons */
+w8-button {
+    transition: 0.2s all ease;
+    -moz-transition: 0.2s all ease;
+    -webkit-transition: 0.2s all ease;
+    -o-transition: 0.2s all ease;
+    -ms-transition: 0.2s all ease;
+}
+.w8-button {
+    padding: 7px 15px 8px 15px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.9;
+}
+.w8-button:hover, .w8-icon:hover {
+    opacity: 1;
+}
+.w8-button:active, .w8-icon:active {
+    color: white !important;
+    background-color: #191919 !important;
+}
+.w8-button.green, .w8-icon.green {
+    background-color: #009900;
+}
+.w8-button.yellow, .w8-icon.yellow {
+    background-color: #fba919;
+}
+
+
+
