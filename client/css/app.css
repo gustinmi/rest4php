@@ -1,0 +1,214 @@
+html {
+    height: 100%;
+}
+body {
+    margin: 0px;
+    padding: 5px;
+    overflow: visible;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    background: #1d1d1d no-repeat top right;
+}
+
+* {
+    color: white;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    text-decoration: none;
+    box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    -ms-box-sizing: border-box !important;
+}
+
+body div {
+    /*border: 1px solid #ffffff;*/
+}
+
+/******************************************************/
+body div.header {
+    height: 63px;
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+}
+body div.header div.title {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 5px;
+    vertical-align: middle;
+}
+
+div.title > img {
+    display: table-cell;
+}
+div.title span {
+     display: block;
+}
+div.title span:first-child {
+    text-align: center;
+    font-size: 30px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+em {
+    color: #fba919;
+    text-decoration: none;
+    font-style:normal;
+}
+
+div.title span:last-child {
+    text-align: left; width: 520px; margin: 0 auto;
+}
+
+
+div.footer {
+    display: table;
+    width: 100%;
+}
+
+body div.toolbar {
+    text-align: right;
+}
+body div.main {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+body div.filters {
+    text-align: left;
+    padding-bottom: 5px;
+}
+div.filters label, div.filters select {
+    cursor: pointer;
+    font-size: 1.1em;
+}
+div.filters table {
+    width: 100%;
+    border-collapse: collapse;
+}
+div.filters table th {
+    font-weight: normal;
+}
+div.filters table td.actions, div.filters table th.actions {
+    text-align: right;
+    width: 70%;
+}
+
+div.overlay {
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    z-index: 500;
+    background-color: #000;
+}
+
+div.podrobnosti div.caption {
+    padding: 10px;
+    font-size: 1.5em;
+}
+div.content div.info {
+    width: 300px;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    padding: 3px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+
+}
+
+
+form.data table {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+}
+form.data {
+    text-align: left;
+}
+form.data table caption {
+    text-align: left;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+form.data table td {
+    vertical-align: middle;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.data label{
+    display: inline-block;
+    width: 180px;
+}
+
+select {
+    padding: 5px;
+    line-height: 1;
+    border: 0;
+    border-radius: 0;
+    height: 34px;
+    -webkit-appearance: none;
+    min-width: 100px;
+    height: 34px;
+    overflow: hidden;
+    background: url(../img/torrent.png) no-repeat right #474747;
+    border: 1px solid #ccc;
+}
+
+.main textarea {
+    color:#000000;
+    padding: 3px;
+    resize: none; /* disable gecko resize possibility */
+    outline: none; /* remove the blue glow (all webkit, ff 3.6, opera 10 )*/
+    width:400px;
+    height: 100px;
+    margin: 0px;
+}
+
+.main button, .main input[type="button"] {
+    cursor: pointer;
+    font-size: 1.1em;
+    padding: 5px;
+}
+
+.main input[type="text"] {
+    font-size: 1.1em;
+    padding: 5px;
+    color: black;
+}
+
+
+
+div.popup {
+    position: fixed;
+    top: 20px;
+    width: 200px;
+    height: 200px;
+    right: 20px;
+    background-color: red;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    border: 1px solid #ffffff;
+    z-index:10010;
+}
+
+div.settings {
+    position: relative;
+    /*top: 20px;*/
+}
+div.action {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+div.preview div {
+    border: 1px solid red;
+}

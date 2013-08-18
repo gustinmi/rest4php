@@ -12,7 +12,7 @@ class Ad extends Controller implements ICrud {
     public function get($args){
         logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = isset($id) ? "SELECT id, name FROM ads where id = $id" : "SELECT  id, name FROM ads";
+        $q = isset($id) ? "SELECT id, name, content FROM ads where id = $id" : "SELECT id, name, content FROM ads";
         $r = mysql_query($q);
         if (!$r) die ('SQL SELECT failed' . $q);
         $result = array();
@@ -20,6 +20,7 @@ class Ad extends Controller implements ICrud {
             $el = array();
             array_push($el, $row[0]);
             array_push($el, $row[1]);
+            array_push($el, htmlentities($row[2]));
             array_push($result, $el);
         }
         return $this->renderResponse($result);

@@ -16,7 +16,7 @@ php_sapi_name() == 'cli' ? $handler = strtolower($argv[1]) : $handler = strtolow
 //predefined REST API ROUTES
 $routes = array(
     '/\/api\/(get|set|delete|create)\/folder\/([0-9]*)/' => array('controller'=>'Folder'),
-    '/\/api\/(get|set|delete|create)\/ad\/([0-9]*)/' => array('controller'=>'Ads'),
+    '/\/api\/(get|set|delete|create)\/ad\/([0-9]*)/' => array('controller'=>'Ad'),
     '/\/api\/(q)\/folder\/([0-9]*)\/ad/' => array('controller'=>'Queries', 'query'=>'from ads where folder_id = '),
 );
 
