@@ -4,7 +4,7 @@ $(document).ready(function () {
         states,
         jqFolderBox,
         jqItemBox,
-        jqTableBody = $("table.items tbody"),
+        jqEditorBody = $("table.items tbody"),
         jqTblCaption = $("table.items caption");
 
     //a simple state engine
@@ -26,22 +26,21 @@ $(document).ready(function () {
                 e.stopImmediatePropagation();
                 var newVal = $(this).val();
                 html5app.log.info('Folders dropdown value changed to:' + newVal);
-                states.adItem.xhr(newVal);
+                states.item.xhr(newVal);
             });
-
             jqItemBox.change(function(e){ // change when second select is clicked
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 var subVal = $(this).val();
                 html5app.log.info('Ads dropdown value changed to:' + subVal);
-                states.table.change(subVal);
+                states.editor.change(subVal);
             });
-
             jqBtnPreview.click(function(e){
-                var newMarkup = $('textarea.editor').val();
-                $('div.preview').empty();
-                markup = $('<div />').html(newMarkup);
-                $('div.preview').html(markup);
+                var newMarkup;
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                newMarkup = $('textarea.editor').val();
+                states.editor.preview(newMarkup);
             });
             jqBtnSave.click(function(e){
 
@@ -78,7 +77,7 @@ $(document).ready(function () {
                 });
             }
         },
-        "adItem" : {
+        "item" : {
             'clear':function(){
                 jqItemBox.find('option').remove().end();
             },
@@ -91,7 +90,7 @@ $(document).ready(function () {
                     dataType: "json",
                     success: function (data) {
                         if (data && data['status'] && data['status']=='ok') {
-                            states.adItem.clear();
+                            states.item.clear();
                             html5app.log.info('XHR Sucess retrieving ads');
                             var options = '';
                             for (var i = 0; i < data['data'].length; i++) {
@@ -106,7 +105,7 @@ $(document).ready(function () {
                 });
             }
         },
-        'table' : {
+        'editor' : {
             'change' : function(itemId){
                 if (itemId != null) {
                     html5app.log.info('Getting item ' + itemId);
@@ -119,8 +118,8 @@ $(document).ready(function () {
                             var tbody = [], i, markup;
                             if (data && data['status'] && data['status']=='ok') {
                                 html5app.log.info('XHR Sucess retrieving ad details');
-                                jqTableBody.empty();
-                                jqTblCaption.text('Item name: ' + data['data'][0][0] + data['data'][0][1]);
+                                html5app.log.info('Item name: ' + data['data'][0][0] + data['data'][0][1]);
+                                jqEditorBody.empty();
                                 tbody.push('<tr>');
                                 tbody.push('<td>');
                                 tbody.push('<textarea class="editor" wrap="hard" maxlength="2000">');
@@ -129,12 +128,13 @@ $(document).ready(function () {
                                 tbody.push('</td>');
                                 tbody.push('<td>');
                                 tbody.push('<div class="preview">')
-                                markup = $('<div />').html("&lt;div&gt;Folder 1 Ad 1&lt;/div&gt;").text();
+                                markup = $('<div />').html(data['data'][0][2]).text();
                                 tbody.push(markup);
                                 tbody.push('</div>')
                                 tbody.push('</td>');
                                 tbody.push('</tr>');
-                                jqTableBody.html(tbody.join(''));
+                                jqEditorBody.html(tbody.join(''));
+
                             }else{
                                 html5app.log.error('Ad details cannot be retrieved');
                             }
@@ -146,6 +146,12 @@ $(document).ready(function () {
 
                     html5app.log.info('items changed');
                 }
+            },
+            'preview' : function(markup){
+                var newMarkup;
+                $('div.preview').empty();
+                newMarkup = $('<div />').html(markup);
+                $('div.preview').html(newMarkup);
             }
         },
         'close' : function(){
@@ -155,7 +161,7 @@ $(document).ready(function () {
             //remove jquery objects from jquery cache
             jqFolderBox.remove();
             jqItemBox.remove();
-            jqTableBody.remove();
+            jqEditorBody.remove();
             jqTblCaption.remove();
         }
 

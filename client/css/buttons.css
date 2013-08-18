@@ -1,5 +1,4 @@
-
-.w8-button, .w8-icon, input[type=submit], input[type=button] {
+.w8-button {
     transition: 0.2s all ease;
     -moz-transition: 0.2s all ease;
     -webkit-transition: 0.2s all ease;
@@ -7,23 +6,13 @@
     -ms-transition: 0.2s all ease;
 }
 
-.w8-button, input[type=submit], input[type=button] {
-    /*width: 100px;*/
+.w8-button {
     padding: 7px 15px 8px 15px;
     border: none;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     opacity: 0.9;
-}
-
-.w8-icon {
-    padding: 7px 7px 7px 7px;
-    border: none; /*background: url(../images/win.png) no-repeat center;*/
-    cursor: pointer;
-    opacity: 0.9;
-    width: 48px;
-    height: 48px;
 }
 
 .w8-button:hover, .w8-icon:hover {
@@ -35,39 +24,13 @@
     background-color: #191919 !important;
 }
 
-.w8-button.iconize {
-    padding-right: 50px !important;
-    /*background: url(../images/win.png) no-repeat 115px center;*/
-}
-
-.w8-button.red, .w8-icon.red {
-    background-color: #d9522c;
-}
-
 .w8-button.green, .w8-icon.green {
     background-color: #009900;
-}
-
-.w8-button.pink, .w8-icon.pink {
-    background-color: #ae193e;
-}
-
-.w8-button.d-blue, .w8-icon.d-blue {
-    background-color: #0099ab;
 }
 
 .w8-button.yellow, .w8-icon.yellow {
     background-color: #fba919;
 }
 
-.w8-button.l-blue, .w8-icon.l-blue {
-    background-color: #2d87ef;
-}
 
-.w8-button.violet, .w8-icon.violet {
-    background-color: #5b39b6;
-}
 
-.w8-button.grey, .w8-icon.grey {
-    background-color: #474747;
-}
