@@ -166,7 +166,7 @@ $(document).ready(function () {
     //modern browsers
     $(window).bind('hashchange', function() {
         var hash = window.location.hash.replace(/^#/,'');
-        alert(hash);
+        //TODO do something with this
     });
 
 
