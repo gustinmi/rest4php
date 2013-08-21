@@ -5,7 +5,8 @@ window.html5app = {
     "settings":{
         "logEnabled":"true"   //clear value for disable
     },
-    "ui":{}
+    "ui":{},
+    "i18n":{}
 };
 
 /**
@@ -38,12 +39,11 @@ window.html5app = {
     };
 
     // translations i18n strings
-    html5app.settings.info = {
-        "table":"Tukaj lahko listate po vaših artiklih. Izberite sekcijo, kategorijo in podkategorijo. Kliknite na vrstico v tabeli za urejanje podrobnosti.",
-        "details":"Vnesite osnovne podatke o artiklu. Vnesite kontaktne podatke, če se razlikujejo od vaših podatkov.",
-        "upload":"Naložite sliko, ki se bo pokazal na strani. Omejitev je 10 MB. Svetujemo vam, da sliko že prej pomanjšate na vašem računalniku.",
-        "suplier_data":"Tukaj vnesete osnovne podatke o vas",
-        "supplier_log":"Vnesite logo podjetja"
+    html5app.settings.i18n = {
+        "en" : {
+            "info":"This is demo application.",
+            "details":"To add another language simply add new object to this array."
+        }
     };
 
     html5app.StringBuilder = function (e) {
@@ -61,9 +61,5 @@ window.html5app = {
     html5app.StringBuilder.prototype.toString = function () {
         return this.strings.join("")
     };
-
-    //gui widgets
-    html5app.ui.settings = {}; //podrobnosti dobavitelja
-    html5app.ui.details = {};  //podrobnosti artikla
 
 })();
