@@ -12,10 +12,10 @@ class Queries extends Controller {
         logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         $qPart = is_array($args) && array_key_exists('query', $args) ? $args['query'] : NULL;
         $q = "SELECT id, name $qPart";
-        $r = mysql_query($q);
+        $r = mysqli_query($this->link, $q);
         if (!$r) die ('SQL SELECT failed' . $q);
         $result = array();
-        while ($row = mysql_fetch_array($r, MYSQL_NUM)) {
+        while ($row = mysqli_fetch_array($r)) {
             $el = array();
             array_push($el, $row[0]);
             array_push($el, $row[1]);

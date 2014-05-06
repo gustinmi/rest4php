@@ -8,6 +8,7 @@ class Bootstrap {
         include("constants.php");
 
         include("common.php");
+
         include( "mysql.php" );
 
         Spl_Autoload_Register ( Array ( 'Bootstrap', 'AutoLoad' ) );
@@ -15,7 +16,6 @@ class Bootstrap {
 
     public static function AutoLoad ( $ClassName )
     {
-        //echo($ClassName . "\r\n");
         Require ( str_replace('\\', '/', $ClassName ) . '.php' );
     }
 }

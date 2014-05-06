@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-class Folder extends Controller implements ICrud {
+class Categorie extends Controller implements ICrud {
 
     public function __construct() {
         parent::__construct();
@@ -12,11 +12,11 @@ class Folder extends Controller implements ICrud {
 	public function get($args){
         logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = isset($id) ? "SELECT id, name FROM folders where id = $id" : "SELECT  id, name FROM folders";
-        $r = mysql_query($q);
+        $q = isset($id) ? "SELECT id, name FROM categories where id = $id" : "SELECT  id, name FROM categories";
+        $r = mysqli_query($this->link, $q);
         if (!$r) die ('SQL SELECT failed' . $q);
         $result = array();
-        while ($row = mysql_fetch_array($r, MYSQL_NUM)) {
+        while ($row = mysqli_fetch_array($r)) {
             $el = array();
             array_push($el, $row[0]);
             array_push($el, $row[1]);
@@ -29,7 +29,7 @@ class Folder extends Controller implements ICrud {
 	public function set($args){
         if (array_key_exists('id',$args) && array_key_exists('name',$args)){
             extract($args);
-            $q = "UPDATE folders SET name = '$name' WHERE id = $id";
+            $q = "UPDATE categories SET name = '$name' WHERE id = $id";
             $result = mysql_query($q);
         }
         return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
@@ -39,7 +39,7 @@ class Folder extends Controller implements ICrud {
 	public function create($args){
         if (array_key_exists('name',$args)){
             extract($args);
-            $q = "INSERT INTO folders VALUES (NULL, '$name')";
+            $q = "INSERT INTO categories VALUES (NULL, '$name')";
             logm($q);
             $result = mysql_query($q);
         }
@@ -50,7 +50,7 @@ class Folder extends Controller implements ICrud {
 	// delete
 	public function delete($args){
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = "DELETE FROM folders where id = $id";
+        $q = "DELETE FROM categories where id = $id";
         mysql_query($q);
 		return $this->renderResponse(array());
 	}

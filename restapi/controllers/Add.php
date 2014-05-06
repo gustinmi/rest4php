@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-class Ad extends Controller implements ICrud {
+class Add extends Controller implements ICrud {
 
     public function __construct() {
         parent::__construct();
@@ -12,11 +12,11 @@ class Ad extends Controller implements ICrud {
     public function get($args){
         logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = isset($id) ? "SELECT id, name, content, folder_id FROM ads where id = $id" : "SELECT id, name, content FROM ads";
-        $r = mysql_query($q);
+        $q = isset($id) ? "SELECT id, name, content, folder_id FROM adds where id = $id" : "SELECT id, name, content FROM adds";
+        $r = mysqli_query($this->link, $q);
         if (!$r) die ('SQL SELECT failed' . $q);
         $result = array();
-        while ($row = mysql_fetch_array($r, MYSQL_NUM)) {
+        while ($row = mysqli_fetch_array($r)) {
             $el = array();
             array_push($el, $row[0]);
             array_push($el, $row[1]);
@@ -32,7 +32,7 @@ class Ad extends Controller implements ICrud {
         logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         if (array_key_exists('id',$args) && array_key_exists('content',$args)){
             extract($args);
-            $q = "UPDATE ads SET content='$content' WHERE id = $id";
+            $q = "UPDATE adds SET content='$content' WHERE id = $id";
             logm($q);
             $result = mysql_query($q);
         }
@@ -53,7 +53,7 @@ class Ad extends Controller implements ICrud {
     // delete
     public function delete($args){
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = "DELETE FROM ads wh ere id = $id";
+        $q = "DELETE FROM adds where id = $id";
         mysql_query($q);
         return $this->renderResponse(array());
     }

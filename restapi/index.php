@@ -13,12 +13,16 @@ require('Bootstrap.php');
 //if CLI context, pass required paramaters as CMD arguments
 php_sapi_name() == 'cli' ? $handler = strtolower($argv[1]) : $handler = strtolower($_REQUEST['handler']);
 
+
+
 //predefined REST API ROUTES
 $routes = array(
-    '/\/api\/(get|set|delete|create)\/folder\/([0-9]*)/' => array('controller'=>'Folder'),
-    '/\/api\/(get|set|delete|create)\/ad\/([0-9]*)/' => array('controller'=>'Ad'),
-    '/\/api\/(q)\/folder\/([0-9]*)\/ad/' => array('controller'=>'Queries', 'query'=>'from ads where folder_id = '),
+    '/api\/(get|set|delete|create)\/folder\/([0-9]*)/' => array('controller'=>'Categorie'),
+    '/api\/(get|set|delete|create)\/ad\/([0-9]*)/' => array('controller'=>'Add'),
+    '/api\/(q)\/folder\/([0-9]*)\/ad/' => array('controller'=>'Queries', 'query'=>'from adds where folder_id = '),
 );
+
+
 
 //dispatcher
 foreach (array_keys($routes) as $key){
