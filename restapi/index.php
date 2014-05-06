@@ -13,16 +13,12 @@ require('Bootstrap.php');
 //if CLI context, pass required paramaters as CMD arguments
 php_sapi_name() == 'cli' ? $handler = strtolower($argv[1]) : $handler = strtolower($_REQUEST['handler']);
 
-
-
 //predefined REST API ROUTES
 $routes = array(
     '/api\/(get|set|delete|create)\/folder\/([0-9]*)/' => array('controller'=>'Categorie'),
     '/api\/(get|set|delete|create)\/ad\/([0-9]*)/' => array('controller'=>'Add'),
     '/api\/(q)\/folder\/([0-9]*)\/ad/' => array('controller'=>'Queries', 'query'=>'from adds where folder_id = '),
 );
-
-
 
 //dispatcher
 foreach (array_keys($routes) as $key){
@@ -44,8 +40,13 @@ foreach (array_keys($routes) as $key){
                 $params = array('query'=> $routes[$key]['query'] . $specifier );
                 break;
         }
+        
+        //ime rezrede
         $controllerName = '\\controllers\\' . ucfirst($controller);
+        
+        //naredim instanco
         $controller = new $controllerName();
+
         $response = Call_User_Func(Array($controller, $request_method), $params);
         break;
     }
@@ -54,5 +55,7 @@ foreach (array_keys($routes) as $key){
 //if we are running this in server environment, render HTTP headers
 if (php_sapi_name() != 'cli')
     header("Content-Type: text/json; charset=utf-8");
+
+//TODO (če ni route || responsa) >> default switch oz. errMessage
 
 echo $response;
