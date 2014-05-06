@@ -9,8 +9,6 @@ class Bootstrap {
 
         include("common.php");
 
-        include( "mysql.php" );
-
         Spl_Autoload_Register ( Array ( 'Bootstrap', 'AutoLoad' ) );
     }
 
