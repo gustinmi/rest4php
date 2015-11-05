@@ -32,10 +32,10 @@ window.html5app = {
 
     // API urls
     html5app.settings.api = {
-        'FOLDERS_URL' : 'http://localhost/restapi/api/get/folder/',
-        'FOLDERS_ADS_URL':'http://localhost/restapi/api/q/folder/{0}/ad',
-        'AD_URL' : 'http://localhost/restapi/api/get/ad/{0}',
-        'SAVE_AD' : 'http://localhost/restapi/api/set/ad/'
+        'FOLDERS_URL' : 'http://delavnica.com/api/get/folder/',
+        'FOLDERS_ADS_URL':'http://delavnica.com/api/q/folder/{0}/ad',
+        'AD_URL' : 'http://delavnica.com/api/get/ad/{0}',
+        'SAVE_AD' : 'http://delavnica.com/api/set/ad/'
     };
 
     // translations i18n strings
