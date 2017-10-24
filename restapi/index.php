@@ -17,12 +17,11 @@ php_sapi_name() == 'cli' ? $handler = strtolower($argv[1]) : $handler = strtolow
 
 // optional parameters
 if (php_sapi_name() == 'cli'){
-    echo "CLIIIII";
-    $id = strtolower($argv[2]); 
+    $id = strtolower($argv[2]);
     $request_method = strtolower($argv[3]);
     $query = strtolower($argv[4]);
 }else {
-    echo "SERVER";
+
     $request_method = strtolower($_SERVER['REQUEST_METHOD']);
     
     if (isset($_REQUEST['query']))

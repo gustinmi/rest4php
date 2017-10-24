@@ -12,10 +12,19 @@ class Category extends Controller implements ICrud {
 	public function get($args){
         if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = isset($id) ? "SELECT id, name FROM categories where id = " . mysqli_real_escape_string($this->link, $id) : "SELECT  id, name FROM categories";
+        if (isset($id)){
+
+            $q = "SELECT id, name FROM categories where id = " . mysqli_real_escape_string($this->link, $id);
+
+            // $q = printf("SELECT id, name FROM categories where id = %s ", mysqli_real_escape_string($this->link, $id));
+
+        }else{
+            $q = "SELECT  id, name FROM categories LIMIT 1, 10";
+        }
+
         if (LOG_VERBOSE) logm($q);
         $r = mysqli_query($this->link, $q);
-        if (!$r) die ('SQL SELECT failed' . $q);
+        if (!$r) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
         $result = array();
         while ($row = mysqli_fetch_array($r)) {
             $el = array();
@@ -34,6 +43,7 @@ class Category extends Controller implements ICrud {
             $q = "UPDATE categories SET name = '" . mysqli_real_escape_string($this->link, $name)  . "' WHERE id = " . mysqli_real_escape_string($this->link, $id);
             if (LOG_VERBOSE) logm($q);
             $result = mysqli_query($this->link, $q);
+            if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
         }else{
             die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         }
@@ -48,6 +58,7 @@ class Category extends Controller implements ICrud {
             $q = "INSERT INTO categories VALUES (NULL, '" . mysqli_real_escape_string($this->link, $name)  . "')";
             if (LOG_VERBOSE) logm($q);
             $result = mysqli_query($this->link, $q);
+            if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
         }else{
             die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         }
@@ -61,7 +72,8 @@ class Category extends Controller implements ICrud {
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
         $q = "DELETE FROM categories where id = " . mysqli_real_escape_string($this->link, $id);
         if (LOG_VERBOSE) logm($q);
-        mysqli_query($this->link, $q);
+        $result = mysqli_query($this->link, $q);
+        if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
 		return $this->renderResponse(array());
 	}
 		

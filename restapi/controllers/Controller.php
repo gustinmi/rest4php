@@ -26,7 +26,7 @@ abstract class Controller {
 
         $this->link = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
         if (!$this->link) {
-            die('Connect Error: ' . mysqli_connect_error());
+            die('Connect Error: ' . mysqli_connect_error($this->link));
         }
 
 	}
