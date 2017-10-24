@@ -34,7 +34,7 @@ class Add extends Controller implements ICrud {
             extract($args);
             $q = "UPDATE adds SET content='$content' WHERE id = $id";
             logm($q);
-            $result = mysql_query($q);
+            $result = mysqli_query($this->link, $q);
         }
         return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
     }
@@ -44,7 +44,7 @@ class Add extends Controller implements ICrud {
         if (array_key_exists('name',$args) && array_key_exists('content',$args)){
             extract($args);
             $q = "INSERT INTO folders VALUES (NULL, '$name', '$content')";
-            $result = mysql_query($q);
+            $result = mysqli_query($this->link, $q);
         }
 
         return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
@@ -54,7 +54,7 @@ class Add extends Controller implements ICrud {
     public function delete($args){
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
         $q = "DELETE FROM adds where id = $id";
-        mysql_query($q);
+        mysqli_query($this->link, $q);
         return $this->renderResponse(array());
     }
 

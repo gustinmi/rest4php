@@ -16,6 +16,15 @@ require('Bootstrap.php');
 php_sapi_name() == 'cli' ? $handler = strtolower($argv[1]) : $handler = strtolower($_REQUEST['handler']);
 php_sapi_name() == 'cli' ? $id = strtolower($argv[2]) : $id = strtolower($_REQUEST['id']);
 php_sapi_name() == 'cli' ? $request_method = strtolower($argv[3]) : $request_method = strtolower($_SERVER['REQUEST_METHOD']);
+php_sapi_name() == 'cli' ? $query = strtolower($argv[4]) : $query = strtolower($_REQUEST['query']);
+
+$cleanHandler = array();
+switch($handler){
+    case 'category' :
+    case 'add' : $cleanHandler['handler'] = $handler;
+        break;
+    default : die("Not supported interface");
+}
 
 //dispatcher
 
@@ -36,7 +45,7 @@ try {
     }
 
     // get the php class name 
-    $controllerName = '\\controllers\\' . ucfirst($handler);
+    $controllerName = '\\controllers\\' . ucfirst($cleanHandler['handler']);
 
     // create instance of class 
     $controller = new $controllerName();
@@ -52,5 +61,6 @@ try {
     else echo $response;
 
 }catch(Exception $error){
+    logm($error);
     die($error);
 }
