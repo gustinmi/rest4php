@@ -89,6 +89,7 @@ This are sample CURL request for testing the REST API
 
     curl 'http://localhost:8083/index.php?&handler=Category&id=1' -X DELETE -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"id":8}'
 
+Please see the tests/tests.sh for example test script.
 
 Application arhitecture decisions
 --------------------------------------
