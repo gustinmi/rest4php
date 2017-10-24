@@ -1,5 +1,9 @@
 <?php
 
+/** Binds together main parts of the application. Namely config file and common functions.
+ * Registers autoload function, so that we do not need to require() controllers by hand
+ * Class Bootstrap
+ */
 class Bootstrap {
 
     function __construct()

@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-class Categorie extends Controller implements ICrud {
+class Category extends Controller implements ICrud {
 
     public function __construct() {
         parent::__construct();
@@ -26,22 +26,22 @@ class Categorie extends Controller implements ICrud {
 	}
 
 	// replace
-	public function set($args){
+	public function put($args){
         if (array_key_exists('id',$args) && array_key_exists('name',$args)){
             extract($args);
-            $q = "UPDATE categories SET name = '$name' WHERE id = $id";
-            $result = mysql_query($q);
+            $q = "UPDATE categories SET name = '${name}' WHERE id = $id";
+            $result = mysqli_query($this->link, $q);
         }
         return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
 	}
 
 	// create new
-	public function create($args){
+	public function post($args){
         if (array_key_exists('name',$args)){
             extract($args);
-            $q = "INSERT INTO categories VALUES (NULL, '$name')";
+            $q = "INSERT INTO categories VALUES (NULL, '${name}')";
             logm($q);
-            $result = mysql_query($q);
+            $result = mysqli_query($this->link, $q);
         }
 
         return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
@@ -50,8 +50,8 @@ class Categorie extends Controller implements ICrud {
 	// delete
 	public function delete($args){
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = "DELETE FROM categories where id = $id";
-        mysql_query($q);
+        $q = "DELETE FROM categories where id = ${id}";
+        mysqli_query($this->link, $q);
 		return $this->renderResponse(array());
 	}
 		

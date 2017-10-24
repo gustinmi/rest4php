@@ -28,7 +28,7 @@ class Add extends Controller implements ICrud {
     }
 
     // replace
-    public function set($args){
+    public function put($args){
         logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         if (array_key_exists('id',$args) && array_key_exists('content',$args)){
             extract($args);
@@ -40,7 +40,7 @@ class Add extends Controller implements ICrud {
     }
 
     // create new
-    public function create($args){
+    public function post($args){
         if (array_key_exists('name',$args) && array_key_exists('content',$args)){
             extract($args);
             $q = "INSERT INTO folders VALUES (NULL, '$name', '$content')";

@@ -1,4 +1,4 @@
-PHP RESTful API with CRUD operations support
+﻿PHP RESTful API with CRUD operations support
 =========
 
 PHP RESTful API example using built-in PHP OOP. Simple and minimalistic RESTful web service, with FrontController pattern,
@@ -8,18 +8,18 @@ on model behind.
 About project
 --------------------------------------
 
-This application contains most simplistic demonstration on how to create a RESful API with support for CRUD operations.
-The code is on my humble opinion in enterprise grade. Further more, whole codebase contains no special frameworks so it's possible to use it on any hosting site that supports php5.
+This application contains most simplistic demonstration on how to create a RESTful API with support for CRUD operations.
+The code is on my humble opinion of enterprise grade. Further more, whole codebase contains no special frameworks so it's possible to use it on any hosting site that supports php5, even if user has no right to modify webserver configuration files. So basically it's a drop in rest interface written for php version from 5 up.
 
-The RESTful API operates on 2 entitites, namely Folder and Ad (or item). They are in 1 .. * relation, like folders and files on 
-your local harddrive. One folder contains many items (or files).
+The demo RESTful API operates on 2 entitites, namely Categories and Adds (or item). They are in 1 .. * relation, like folders and files on 
+your local hard drive. One category contains many sub items.
 
 RESTful operations supported are
 
-1. get  (read operations, uses a HTTP GET. We determine requested entity via URL matching)
-2. delete (delete operation. Same as before)
-2. set (update operation. The data is posted to server as a RAW HTTP POST request)
-4. create (same as above)
+1. GET (read operations. We determine requested entity via URL matching)
+2. DELETE (delete operation. The data is posted to server as a raw HTTP DELETE request)
+2. PUT (update operation. The data is posted to server as a raw HTTP PUT request)
+4. POST (adding nw content. The data is posted to server as a raw HTTP POST request)
 
 To provide unified API for client, all server communication (messages) take following format. 
 
@@ -33,7 +33,7 @@ Configuration
 
 1. Execute db_create.sql on your MySql instance to create table structure and some test data.
 
-    mysql -u root -p < db_create.sql
+    mysql -u root -p < db_creacurl 'http://localhost:8083/index.php?&handler=Category&id=1' -X PUT -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"id":8}'te.sql
 
 2. Edit config/constans.dev(elopment) or prod(uction) to fit your database.
 
@@ -41,9 +41,12 @@ Configuration
     
     ln -s config/constants.dev.php constants.php
 
-4. Create a symlink rest4php in your apache htdocs folder pointing to these application's root folder php4rest.
+   As alternative, is using windows, just copy the file from config folder to the root folder 
 
-5. If your apache instance does not support .htaccess files, add following directives to apache site configuration file 
+4. If serving from apache webserver, create a symlink rest4php in your apache htdocs folder pointing to these application's root folder php4rest.
+
+5. If you wanna use real REST urls, you need to tweak apache .htaccess files, to rewrite REST urls to query string parameters.
+    You need something like these 
     <pre><code>
     &lt;Directory /var/www/rest4php&gt;
         RewriteEngine On
@@ -55,33 +58,34 @@ Configuration
 Test application
 --------------------------------------
 
-To quckly test application (only read operations) you can use your browser and navigate to
+To quckly test application (only read operations) you can use embedded PHP server. Start it from root folder like these:
+    
+    php -S localhost:8083
 
- - http://[SERVER_NAME]/rest4php/api/get/folder
- - http://[SERVER_NAME]/prest4php/api/get/folder/1
- - http://[SERVER_NAME]/rest4php/api/get/folder/1/ad
+Then navigate your browser to 
 
+    http://localhost:8083/index.php?&handler=Add&id=1
 
 To fully test application, use CURL and make rerquests like this:
 
 This are sample CURL request for testing the REST API
 
-1) Read element
+1) Insert element with HTTP POST
 
-    curl 'http://rest4php.mitjagustin.si/api/get/folder/' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' --compressed
-    curl 'http://rest4php.mitjagustin.si/api/get/folder/1' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' --compressed
+    curl 'http://localhost:8083/index.php?&handler=Category' -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"name":"test new category"}' 
 
-2) Delete element
+2) Read element with HTTP GET request
 
-    curl 'http://rest4php.mitjagustin.si/api/delete/folder/9' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' --compressed
+    curl -v 'http://localhost:8083/index.php?&handler=Add&id=1'
 
-3) Update element
+3) Update element with HTTP PUT
 
-    curl 'http://rest4php.mitjagustin.si/api/set/folder/' -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"id":8,"name":"testing 1"}' --compressed
+    curl 'http://localhost:8083/index.php?&handler=Category&id=1' -X PUT -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"id":8, "name":"testing 1"}'
 
-4) Insert element
+4) Delete element with HTTP DELETE
 
-    curl 'http://rest4php.mitjagustin.si/api/create/folder/' -H 'Content-Type: application/json' -H 'Cache-Control: max-age=0' -H 'X-Requested-With: XMLHttpRequest'  --data-binary '{"name":"test new"}' --compressed
+    curl 'http://localhost:8083/index.php?&handler=Category&id=1' -X DELETE -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"id":8}'
+
 
 Application arhitecture decisions
 --------------------------------------
@@ -103,28 +107,8 @@ we use simple solution with symlink. So for the proper configuration file to be 
 
 3) PHP5 Autoloader
 
-Please see my document : http://mitjagustin.si/2013/05/14/php-autoloader-require-and-include-explained/
+Please see documentation for php autoloader
 
 4) Encapsulate code that needs to be run in web context
 
 To achieve good testability and independence of running in web context, code encapsulates all stuff that uses that web context parameters. There is also a alternate way to provide such a information via CLI arguments.
-
-
-References
-================================================================
-Raw HTTP request processing sample is taken from here [1].
-
-
-  [1]: http://daringfireball.net/projects/markdown/syntax#autolink        "RESTful API"
-
-
-
-
-
-
-
-
-
-
-
-
