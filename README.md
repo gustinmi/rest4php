@@ -36,7 +36,7 @@ Configuration
 
 1. Execute db_create.sql on your MySql instance to create table structure and fill in some dummy test data.
 
-    mysql -u root -p < db_creacurl 'http://localhost:8083/index.php?&handler=Category&id=1' -X PUT -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"id":8}'te.sql
+    mysql -u root -p < db_create.sql
 
 2. Edit config/constans.dev(elopment) or prod(uction) to fit your database.
 
