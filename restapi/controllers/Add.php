@@ -12,10 +12,10 @@ class Add extends Controller implements ICrud {
     public function get($args){
         if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = isset($id) ? "SELECT id, name, content, folder_id FROM adds where id = $id" : "SELECT id, name, content FROM adds";
+        $q = isset($id) ? "SELECT id, name, content, folder_id FROM adds where id = $id" : "SELECT id, name, content, folder_id FROM adds LIMIT 1, 10";
         if (LOG_VERBOSE) logm($q);
         $r = mysqli_query($this->link, $q);
-        if (!$r) die ('SQL SELECT failed' . $q);
+         if (!$r) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
         $result = array();
         while ($row = mysqli_fetch_array($r)) {
             $el = array();
@@ -25,6 +25,7 @@ class Add extends Controller implements ICrud {
             array_push($el, $row[3]);
             array_push($result, $el);
         }
+        $this->link->close();
         return $this->renderResponse($result);
     }
 
@@ -36,10 +37,14 @@ class Add extends Controller implements ICrud {
             $q = "UPDATE adds SET content='" . mysqli_real_escape_string($this->link, $content) . "' WHERE id = " . mysqli_real_escape_string($this->link, $id);
             if (LOG_VERBOSE) logm($q);
             $result = mysqli_query($this->link, $q);
+            $numAffected =  mysqli_affected_rows($this->link);
+            if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+            if (!$numAffected || $numAffected != 1) die ('Update did not update any rows');
+            $this->link->close();
+            return $result == true ? $this->renderResponse(array($numAffected)) : $this->renderError(array());
         }else{
             die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         }
-        return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
     }
 
     // create new
@@ -47,13 +52,23 @@ class Add extends Controller implements ICrud {
         if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         if (array_key_exists('name',$args) && array_key_exists('content',$args)){
             extract($args);
-            $q = "INSERT INTO folders VALUES (NULL, '" + mysqli_real_escape_string($this->link, $name) + "', '" .  mysqli_real_escape_string($this->link, $content)  ."')";
+            // not tested yet
+            $q = "INSERT INTO folders (id, folder_id, name, content) VALUES (NULL,"
+                . mysqli_real_escape_string($this->link, $folder_id)
+                . "'" . mysqli_real_escape_string($this->link, $name) . "'"
+                . ", '" . mysqli_real_escape_string($this->link, $content)  . "')";
+
             if (LOG_VERBOSE) logm($q);
             $result = mysqli_query($this->link, $q);
+            $insertId = mysqli_insert_id($this->link);
+            if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+            if (!$insertId) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+            $this->link->close();
+            return $result == true ? $this->renderResponse(array($insertId)) : $this->renderError(array());
+
         }else{
             die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         }
-        return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
     }
 
     // delete
@@ -62,8 +77,12 @@ class Add extends Controller implements ICrud {
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
         $q = "DELETE FROM adds where id = " . mysqli_real_escape_string($this->link, $id);
         if (LOG_VERBOSE) logm($q);
-        mysqli_query($this->link, $q);
-        return $this->renderResponse(array());
+        $result = mysqli_query($this->link, $q);
+        $numAffected =  mysqli_affected_rows($this->link);
+        if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+        if (!$numAffected || $numAffected != 1) die ('Update did not update any rows');
+        $this->link->close();
+        return $this->renderResponse(array($numAffected));
     }
 
 

@@ -32,6 +32,7 @@ class Category extends Controller implements ICrud {
             array_push($el, $row[1]);
             array_push($result, $el);
         }
+        $this->link->close();
 		return $this->renderResponse($result);
 	}
 
@@ -44,26 +45,34 @@ class Category extends Controller implements ICrud {
             if (LOG_VERBOSE) logm($q);
             $result = mysqli_query($this->link, $q);
             if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+            $numAffected =  mysqli_affected_rows($this->link);
+            if (!$numAffected || $numAffected != 1) die ('Update did not update any rows');
+            $this->link->close();
+            return $result == true ? $this->renderResponse(array($numAffected)) : $this->renderError(array());
         }else{
             die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         }
-        return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
 	}
 
 	// create new
 	public function post($args){
         if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         if (array_key_exists('name',$args)){
+
             extract($args);
             $q = "INSERT INTO categories VALUES (NULL, '" . mysqli_real_escape_string($this->link, $name)  . "')";
             if (LOG_VERBOSE) logm($q);
             $result = mysqli_query($this->link, $q);
+            $insertId = mysqli_insert_id($this->link);
             if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+            if (!$insertId) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+            $this->link->close();
+            return $result == true ? $this->renderResponse(array($insertId)) : $this->renderError(array());
+
         }else{
             die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         }
 
-        return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
 	}
 
 	// delete
@@ -73,8 +82,11 @@ class Category extends Controller implements ICrud {
         $q = "DELETE FROM categories where id = " . mysqli_real_escape_string($this->link, $id);
         if (LOG_VERBOSE) logm($q);
         $result = mysqli_query($this->link, $q);
+        $numAffected =  mysqli_affected_rows($this->link);
         if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
-		return $this->renderResponse(array());
+        if (!$numAffected || $numAffected != 1) die ('Update did not update any rows');
+        $this->link->close();
+		return $this->renderResponse(array($numAffected));
 	}
 		
 

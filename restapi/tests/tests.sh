@@ -17,12 +17,12 @@ curl 'http://localhost:8083/index.php?&handler=Category'
 echo ""
 
 echo "Update element with HTTP PUT"
-update_command="curl 'http://localhost:8083/index.php?&handler=Category&id=1' -X PUT -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{\"id\":8, \"name\":\"testing 1 $(date)\"}'"
+update_command="curl 'http://localhost:8083/index.php?&handler=Category&id=1' -X PUT -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{\"id\":3, \"name\":\"testing 1 $(date)\"}'"
 eval $update_command
 echo ""
 
 echo "Delete element with HTTP DELETE"
-curl 'http://localhost:8083/index.php?&handler=Category' -X DELETE -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"id":8}'
+curl 'http://localhost:8083/index.php?&handler=Category' -X DELETE -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"id":39}'
 echo ""
 
 # echo "Testing add \n"
