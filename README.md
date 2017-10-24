@@ -9,17 +9,20 @@ About project
 --------------------------------------
 
 This application contains most simplistic demonstration on how to create a RESTful API with support for CRUD operations.
-The code is on my humble opinion of enterprise grade. Further more, whole codebase contains no special frameworks so it's possible to use it on any hosting site that supports php5, even if user has no right to modify webserver configuration files. So basically it's a drop in rest interface written for php version from 5 up.
+The code is on my humble opinion of enterprise grade. Further more, whole codebase contains no special frameworks so it's possible to use it on any hosting site that supports php5, even if user has no right to modify webserver configuration files. So basically it's a drop-in RESTt interface written for php version from 5 up.
 
-The demo RESTful API operates on 2 entitites, namely Categories and Adds (or item). They are in 1 .. * relation, like folders and files on 
-your local hard drive. One category contains many sub items.
+The demo RESTful API operates on 2 entitites, namely Category and Add. They are in 1 .. * relation, like folders and files on 
+your local hard drive. One category contains contains many sub items.
 
-RESTful operations supported are
+Supported RESTful operations  are
 
 1. GET (read operations. We determine requested entity via URL matching)
-2. DELETE (delete operation. The data is posted to server as a raw HTTP DELETE request)
-2. PUT (update operation. The data is posted to server as a raw HTTP PUT request)
-4. POST (adding nw content. The data is posted to server as a raw HTTP POST request)
+
+3. 2. DELETE (delete operation. The data is posted to server as a raw HTTP DELETE request)
+
+3. 2. PUT (update operation. The data is posted to server as a raw HTTP PUT request)
+
+5. 4. POST (adding nw content. The data is posted to server as a raw HTTP POST request)
 
 To provide unified API for client, all server communication (messages) take following format. 
 
@@ -31,7 +34,7 @@ To provide unified API for client, all server communication (messages) take foll
 Configuration
 --------------------------------------
 
-1. Execute db_create.sql on your MySql instance to create table structure and some test data.
+1. Execute db_create.sql on your MySql instance to create table structure and fill in some dummy test data.
 
     mysql -u root -p < db_creacurl 'http://localhost:8083/index.php?&handler=Category&id=1' -X PUT -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"id":8}'te.sql
 
