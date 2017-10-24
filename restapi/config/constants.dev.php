@@ -3,3 +3,4 @@
     define("DB_USER", "root");
     define("DB_PASS", "p");
     define("DB_NAME", "html5");
+    define("LOG_VERBOSE", true);

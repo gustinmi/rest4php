@@ -10,9 +10,10 @@ class Add extends Controller implements ICrud {
 
     // retrieve
     public function get($args){
-        logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
+        if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
         $q = isset($id) ? "SELECT id, name, content, folder_id FROM adds where id = $id" : "SELECT id, name, content FROM adds";
+        if (LOG_VERBOSE) logm($q);
         $r = mysqli_query($this->link, $q);
         if (!$r) die ('SQL SELECT failed' . $q);
         $result = array();
@@ -29,31 +30,38 @@ class Add extends Controller implements ICrud {
 
     // replace
     public function put($args){
-        logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
+        if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         if (array_key_exists('id',$args) && array_key_exists('content',$args)){
             extract($args);
-            $q = "UPDATE adds SET content='$content' WHERE id = $id";
-            logm($q);
+            $q = "UPDATE adds SET content='" . mysqli_real_escape_string($this->link, $content) . "' WHERE id = " . mysqli_real_escape_string($this->link, $id);
+            if (LOG_VERBOSE) logm($q);
             $result = mysqli_query($this->link, $q);
+        }else{
+            die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         }
         return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
     }
 
     // create new
     public function post($args){
+        if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         if (array_key_exists('name',$args) && array_key_exists('content',$args)){
             extract($args);
-            $q = "INSERT INTO folders VALUES (NULL, '$name', '$content')";
+            $q = "INSERT INTO folders VALUES (NULL, '" + mysqli_real_escape_string($this->link, $name) + "', '" .  mysqli_real_escape_string($this->link, $content)  ."')";
+            if (LOG_VERBOSE) logm($q);
             $result = mysqli_query($this->link, $q);
+        }else{
+            die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         }
-
         return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
     }
 
     // delete
     public function delete($args){
+        if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = "DELETE FROM adds where id = $id";
+        $q = "DELETE FROM adds where id = " . mysqli_real_escape_string($this->link, $id);
+        if (LOG_VERBOSE) logm($q);
         mysqli_query($this->link, $q);
         return $this->renderResponse(array());
     }

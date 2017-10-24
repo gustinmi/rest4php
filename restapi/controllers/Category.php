@@ -10,9 +10,10 @@ class Category extends Controller implements ICrud {
 
 	// retrieve
 	public function get($args){
-        logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
+        if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = isset($id) ? "SELECT id, name FROM categories where id = $id" : "SELECT  id, name FROM categories";
+        $q = isset($id) ? "SELECT id, name FROM categories where id = " . mysqli_real_escape_string($this->link, $id) : "SELECT  id, name FROM categories";
+        if (LOG_VERBOSE) logm($q);
         $r = mysqli_query($this->link, $q);
         if (!$r) die ('SQL SELECT failed' . $q);
         $result = array();
@@ -27,21 +28,28 @@ class Category extends Controller implements ICrud {
 
 	// replace
 	public function put($args){
+        if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         if (array_key_exists('id',$args) && array_key_exists('name',$args)){
             extract($args);
-            $q = "UPDATE categories SET name = '${name}' WHERE id = $id";
+            $q = "UPDATE categories SET name = '" . mysqli_real_escape_string($this->link, $name)  . "' WHERE id = " . mysqli_real_escape_string($this->link, $id);
+            if (LOG_VERBOSE) logm($q);
             $result = mysqli_query($this->link, $q);
+        }else{
+            die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         }
         return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
 	}
 
 	// create new
 	public function post($args){
+        if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         if (array_key_exists('name',$args)){
             extract($args);
-            $q = "INSERT INTO categories VALUES (NULL, '${name}')";
-            logm($q);
+            $q = "INSERT INTO categories VALUES (NULL, '" . mysqli_real_escape_string($this->link, $name)  . "')";
+            if (LOG_VERBOSE) logm($q);
             $result = mysqli_query($this->link, $q);
+        }else{
+            die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         }
 
         return $result == true ? $this->renderResponse(array()) : $this->renderError(array());
@@ -49,8 +57,10 @@ class Category extends Controller implements ICrud {
 
 	// delete
 	public function delete($args){
+        if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = "DELETE FROM categories where id = ${id}";
+        $q = "DELETE FROM categories where id = " . mysqli_real_escape_string($this->link, $id);
+        if (LOG_VERBOSE) logm($q);
         mysqli_query($this->link, $q);
 		return $this->renderResponse(array());
 	}

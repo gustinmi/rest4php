@@ -14,9 +14,24 @@ require('Bootstrap.php');
 //support for commandline testing : pass required paramaters as CMD arguments
 
 php_sapi_name() == 'cli' ? $handler = strtolower($argv[1]) : $handler = strtolower($_REQUEST['handler']);
-php_sapi_name() == 'cli' ? $id = strtolower($argv[2]) : $id = strtolower($_REQUEST['id']);
-php_sapi_name() == 'cli' ? $request_method = strtolower($argv[3]) : $request_method = strtolower($_SERVER['REQUEST_METHOD']);
-php_sapi_name() == 'cli' ? $query = strtolower($argv[4]) : $query = strtolower($_REQUEST['query']);
+
+// optional parameters
+if (php_sapi_name() == 'cli'){
+    echo "CLIIIII";
+    $id = strtolower($argv[2]); 
+    $request_method = strtolower($argv[3]);
+    $query = strtolower($argv[4]);
+}else {
+    echo "SERVER";
+    $request_method = strtolower($_SERVER['REQUEST_METHOD']);
+    
+    if (isset($_REQUEST['query']))
+        $query = strtolower($_REQUEST['query']);
+
+    if (isset($_REQUEST['id']))    
+        $id = strtolower($_REQUEST['id']);
+}
+
 
 $cleanHandler = array();
 switch($handler){
