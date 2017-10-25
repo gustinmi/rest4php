@@ -4,26 +4,26 @@
 echo "Testing category \n"
 
 echo "Insert element with HTTP POST"
-insert_command="curl 'http://localhost:8083/index.php?&handler=Category' -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{\"name\":\"test new category $(date)\"}'" 
-eval $insert_command
+insert_command="curl --silent 'http://localhost:8083/index.php?&handler=Category' -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{\"name\":\"test new category $(date)\"}'" 
+eval $insert_command 
 echo ""
 
 echo "Read element with HTTP GET request"
-curl 'http://localhost:8083/index.php?&handler=Category&id=1'
+curl --silent 'http://localhost:8083/index.php?&handler=Category&id=1'
 echo ""
 
 echo "Read all elements with HTTP GET request"
-curl 'http://localhost:8083/index.php?&handler=Category'
+curl --silent 'http://localhost:8083/index.php?&handler=Category'
 echo ""
 
 echo "Update element with HTTP PUT"
-update_command="curl 'http://localhost:8083/index.php?&handler=Category&id=1' -X PUT -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{\"id\":3, \"name\":\"testing 1 $(date)\"}'"
+update_command="curl --silent 'http://localhost:8083/index.php?&handler=Category&id=1' -X PUT -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{\"id\":3, \"name\":\"testing 1 $(date)\"}'"
 eval $update_command
 echo ""
 
-echo "Delete element with HTTP DELETE"
-curl 'http://localhost:8083/index.php?&handler=Category' -X DELETE -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"id":39}'
-echo ""
+#echo "Delete element with HTTP DELETE"
+#curl 'http://localhost:8083/index.php?&handler=Category' -X DELETE -H 'Content-Type: application/json' -H 'X-Requested-With: XMLHttpRequest' --data-binary '{"id":39}'
+#echo ""
 
 # echo "Testing add \n"
 # echo ""

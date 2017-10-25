@@ -46,7 +46,10 @@ try {
 
     switch ($request_method){
         case 'get':
-            $params = array('id' => $id);
+            if(isset($id))
+                $params = array('id' => $id);
+            else
+                $params = array();
             break;
         case 'put':
         case 'delete':

@@ -9,3 +9,4 @@ function logm($msg){
     else
         error_log("$msg");
 }
+

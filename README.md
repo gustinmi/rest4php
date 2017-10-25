@@ -18,11 +18,11 @@ Supported RESTful operations  are
 
 1. GET (read operations. We determine requested entity via URL matching)
 
-3. 2. DELETE (delete operation. The data is posted to server as a raw HTTP DELETE request)
+2. DELETE (delete operation. The data is posted to server as a raw HTTP DELETE request)
 
-3. 2. PUT (update operation. The data is posted to server as a raw HTTP PUT request)
+3. PUT (update operation. The data is posted to server as a raw HTTP PUT request)
 
-5. 4. POST (adding nw content. The data is posted to server as a raw HTTP POST request)
+4. POST (adding nw content. The data is posted to server as a raw HTTP POST request)
 
 To provide unified API for client, all server communication (messages) take following format. 
 
@@ -69,7 +69,12 @@ Then navigate your browser to
 
     http://localhost:8083/index.php?&handler=Add&id=1
 
-To fully test application, use CURL and make rerquests like this:
+To quickly run test, navigate to test folder and execute
+
+    cd tests
+    sh tests.sh
+
+To test application manually, use CURL and make requests like this:
 
 This are sample CURL request for testing the REST API
 

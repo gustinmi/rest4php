@@ -4,6 +4,8 @@ namespace controllers;
 
 class Add extends Controller implements ICrud {
 
+    use Logger;
+
     public function __construct() {
         parent::__construct();
     }
@@ -15,7 +17,7 @@ class Add extends Controller implements ICrud {
         $q = isset($id) ? "SELECT id, name, content, folder_id FROM adds where id = $id" : "SELECT id, name, content, folder_id FROM adds LIMIT 1, 10";
         if (LOG_VERBOSE) logm($q);
         $r = mysqli_query($this->link, $q);
-         if (!$r) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+        if (!$r) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
         $result = array();
         while ($row = mysqli_fetch_array($r)) {
             $el = array();
@@ -25,8 +27,10 @@ class Add extends Controller implements ICrud {
             array_push($el, $row[3]);
             array_push($result, $el);
         }
+        $resp = $this->renderResponse($result);
+        mysqli_free_result($result);
         $this->link->close();
-        return $this->renderResponse($result);
+        return $resp;
     }
 
     // replace
@@ -40,8 +44,10 @@ class Add extends Controller implements ICrud {
             $numAffected =  mysqli_affected_rows($this->link);
             if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
             if (!$numAffected || $numAffected != 1) die ('Update did not update any rows');
+            $resp = $result == true ? $this->renderResponse(array($numAffected)) : $this->renderError(array());
+            mysqli_free_result($result);
             $this->link->close();
-            return $result == true ? $this->renderResponse(array($numAffected)) : $this->renderError(array());
+            return $resp;
         }else{
             die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
         }
@@ -63,8 +69,10 @@ class Add extends Controller implements ICrud {
             $insertId = mysqli_insert_id($this->link);
             if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
             if (!$insertId) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+            $resp = $result == true ? $this->renderResponse(array($insertId)) : $this->renderError(array());
+            mysqli_free_result($result);
             $this->link->close();
-            return $result == true ? $this->renderResponse(array($insertId)) : $this->renderError(array());
+            return $resp;
 
         }else{
             die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
@@ -81,8 +89,10 @@ class Add extends Controller implements ICrud {
         $numAffected =  mysqli_affected_rows($this->link);
         if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
         if (!$numAffected || $numAffected != 1) die ('Update did not update any rows');
+        $resp = $this->renderResponse(array($numAffected));
+        mysqli_free_result($result);
         $this->link->close();
-        return $this->renderResponse(array($numAffected));
+        return $resp;
     }
 
 
