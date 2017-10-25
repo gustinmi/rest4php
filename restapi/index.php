@@ -68,8 +68,11 @@ try {
     $response = Call_User_Func(Array($controller, $request_method), $params);
 
     //if we are running this in server environment, render HTTP headers
-    if (php_sapi_name() != 'cli')
+    if (php_sapi_name() != 'cli'){
+        header('Cache-Control: no-cache');
+        header('Pragma: no-cache');
         header("Content-Type: text/json; charset=utf-8");
+    }
 
     if (empty($response)) die("There was no response from database");
     else echo $response;
