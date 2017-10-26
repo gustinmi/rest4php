@@ -12,22 +12,26 @@ class Add extends Controller implements ICrud {
 
     // retrieve
     public function get($args){
-        if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
+        $this->log("GET called");
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = isset($id) ? "SELECT id, name, content, folder_id FROM adds where id = $id" : "SELECT id, name, content, folder_id FROM adds LIMIT 1, 10";
-        if (LOG_VERBOSE) logm($q);
-        $r = mysqli_query($this->link, $q);
-        if (!$r) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
-        $result = array();
-        while ($row = mysqli_fetch_array($r)) {
+        if (isset($id)){
+            $q = "SELECT id, name, content, folder_id FROM adds where id = " . mysqli_real_escape_string($this->link, $id);
+        }else{
+            $q = "SELECT id, name, content, folder_id FROM adds LIMIT 1, 10";
+        }
+        $this->log($q);
+        $result = mysqli_query($this->link, $q);
+        if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+        $allRows = array();
+        while ($row = mysqli_fetch_array($result)) {
             $el = array();
             array_push($el, $row[0]);
             array_push($el, $row[1]);
             array_push($el, htmlentities($row[2]));
             array_push($el, $row[3]);
-            array_push($result, $el);
+            array_push($allRows, $el);
         }
-        $resp = $this->renderResponse($result);
+        $resp = $this->renderResponse($allRows);
         mysqli_free_result($result);
         $this->link->close();
         return $resp;
@@ -35,64 +39,63 @@ class Add extends Controller implements ICrud {
 
     // replace
     public function put($args){
-        if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
-        if (array_key_exists('id',$args) && array_key_exists('content',$args)){
+        $this->log("PUT called");
+        if (array_key_exists('id',$args) && array_key_exists('content', $args)){
             extract($args);
             $q = "UPDATE adds SET content='" . mysqli_real_escape_string($this->link, $content) . "' WHERE id = " . mysqli_real_escape_string($this->link, $id);
-            if (LOG_VERBOSE) logm($q);
+            $this->log($q);
             $result = mysqli_query($this->link, $q);
+            if (!isset($result)) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
             $numAffected =  mysqli_affected_rows($this->link);
-            if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
-            if (!$numAffected || $numAffected != 1) die ('Update did not update any rows');
-            $resp = $result == true ? $this->renderResponse(array($numAffected)) : $this->renderError(array());
-            mysqli_free_result($result);
+            if (!isset($numAffected) || $numAffected != 1) die ('Update did not update any rows');
+            $resp = $this->renderResponse(array($numAffected));
             $this->link->close();
             return $resp;
         }else{
-            die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
+            $this->log("Missing parameter 'content' or 'id'");
+            die("Missing parameters");
         }
     }
 
     // create new
     public function post($args){
-        if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
-        if (array_key_exists('name',$args) && array_key_exists('content',$args)){
+        $this->log("POST called" . print_r($args, true));
+        if (array_key_exists('name', $args) && array_key_exists('content', $args)){
             extract($args);
-            // not tested yet
-            $q = "INSERT INTO folders (id, folder_id, name, content) VALUES (NULL,"
-                . mysqli_real_escape_string($this->link, $folder_id)
-                . "'" . mysqli_real_escape_string($this->link, $name) . "'"
-                . ", '" . mysqli_real_escape_string($this->link, $content)  . "')";
-
-            if (LOG_VERBOSE) logm($q);
+            $q = "INSERT INTO folders (id, folder_id, name, content) VALUES (NULL," . mysqli_real_escape_string($this->link, $folder_id) . ", '". mysqli_real_escape_string($this->link, $name) . "', '" . mysqli_real_escape_string($this->link, $content) . "')";
+            $this->log($q);
             $result = mysqli_query($this->link, $q);
+            if (!isset($result)) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
             $insertId = mysqli_insert_id($this->link);
-            if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
-            if (!$insertId) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
-            $resp = $result == true ? $this->renderResponse(array($insertId)) : $this->renderError(array());
-            mysqli_free_result($result);
+            if (!isset($insertId)) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+            $resp = $this->renderResponse(array($insertId));
             $this->link->close();
             return $resp;
 
         }else{
-            die("Missing parameters in " . __CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
+            $this->log("Missing parameter 'folder_id', 'name' or 'content' ");
+            die("Missing parameters");
         }
     }
 
     // delete
     public function delete($args){
-        if (LOG_VERBOSE) logm(__CLASS__  . ' ' . __METHOD__ . __LINE__ ."\r\n");
+        $this->log("DELETE called");
         $id = is_array($args) && array_key_exists('id', $args) ? $args['id'] : NULL;
-        $q = "DELETE FROM adds where id = " . mysqli_real_escape_string($this->link, $id);
-        if (LOG_VERBOSE) logm($q);
-        $result = mysqli_query($this->link, $q);
-        $numAffected =  mysqli_affected_rows($this->link);
-        if (!$result) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
-        if (!$numAffected || $numAffected != 1) die ('Update did not update any rows');
-        $resp = $this->renderResponse(array($numAffected));
-        mysqli_free_result($result);
-        $this->link->close();
-        return $resp;
+        if(isset($id)){
+            $q = "DELETE FROM adds where id = " . mysqli_real_escape_string($this->link, $id);
+            $this->log($q);
+            $result = mysqli_query($this->link, $q);
+            $numAffected =  mysqli_affected_rows($this->link);
+            if (!isset($result)) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+            if (!isset($numAffected) || $numAffected != 1) die ('Update did not update any rows');
+            $resp = $this->renderResponse(array($numAffected));
+            $this->link->close();
+            return $resp;
+        }else{
+            $this->log("Missing parameter 'id'");
+            die("Missing parameters");
+        }
     }
 
 

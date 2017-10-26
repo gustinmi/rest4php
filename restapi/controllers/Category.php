@@ -45,7 +45,7 @@ class Category extends Controller implements ICrud {
             $result = mysqli_query($this->link, $q);
             if (!isset($result)) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
             $numAffected =  mysqli_affected_rows($this->link);
-            if (!isset($numAffected)) die ('Update did not update any rows');
+            if (!isset($numAffected) || $numAffected != 1) die ('Update did not update any rows');
             $resp = $this->renderResponse(array($numAffected));
             $this->link->close();
             return $resp;
@@ -63,8 +63,8 @@ class Category extends Controller implements ICrud {
             $q = "INSERT INTO categories VALUES (NULL, '" . mysqli_real_escape_string($this->link, $name)  . "')";
             $this->log($q);
             $result = mysqli_query($this->link, $q);
-            $insertId = mysqli_insert_id($this->link);
             if (!isset($result)) die ('SQL SELECT failed with following error' . " Error description: " . mysqli_error($this->link));
+            $insertId = mysqli_insert_id($this->link);
             if (!isset($insertId)) die ('Insert id was not retrieved');
             $resp = $this->renderResponse(array($insertId));
             $this->link->close();

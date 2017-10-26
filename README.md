@@ -121,3 +121,9 @@ Please see documentation for php autoloader
 4) Encapsulate code that needs to be run in web context
 
 To achieve good testability and independence of running in web context, code encapsulates all stuff that uses that web context parameters. There is also a alternate way to provide such a information via CLI arguments.
+
+5) Level of code reuse in controller classes
+
+There is some copy paste of code in controller classes. Reason for this is as follows : there is always something going on beside the main sql statement in
+real word applications. It's never just simple insert into one table, despite we are dealing with RESTful entity. So it's better to have some
+boilerplate code, and leave it to specific cases, then to have fixed framework where it's very difficult to make exceptions.

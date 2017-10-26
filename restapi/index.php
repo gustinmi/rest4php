@@ -56,6 +56,7 @@ try {
         case 'post':
             $raw = file_get_contents('php://input');  // get the raw http request body
             $params = json_decode($raw, true); // decode it into json array
+            if(!isset($params)) die("Error parsing json: $raw");
             break;
         default:
             die("request method ${request_method} not supported");    
