@@ -1,43 +1,217 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>REST4php Demo</title>
-    <link type="text/css" rel="stylesheet" media="all" href="css/app.css">
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>REST4PHP -> Framework</title>
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="rest4php.mitjagustin.com">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="rest4php framework from Mitja Gustin">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="PHP RESTful API example using built-in PHP OOP. Simple and minimalistic RESTful web service">
+    <meta property="og:url" content="http://rest4php.mitjagustin.com">
+    <link rel="stylesheet" href="client/css/foundation.min.css" />
+	<link rel="stylesheet" type="text/css" href="client/css/index.css">
+    <link rel="canonical" href="http://mitjagustin.com">
 </head>
 <body>
-<div class="header">
-    <div class="title">
-        <span><em>Add creator</em></span>
-    </div>
+
+<div class="toppusher"></div>
+
+<div class="top-container">
+    <nav class="top-bar" role="navigation">
+        <section class="top-bar-section">
+            <ul>
+                <li><a id="homeBtn" href="#">Home</a></li>
+                <li class="has-dropdown not-click"><a id="122">Actions</a>
+                    <ul class="dropdown noborder">
+                        <li><a id="123">Editing</a></li>
+                        <li class="has-dropdown not-click"><a href="#">Administrating content</a>
+                            <ul class="dropdown noborder">
+                                <li><a id="376">Adding add content</a></li>
+                                <li><a id="183">Editing category</a></li>
+                            </ul>
+                        </li>
+                        <li><a id="125">Browser</a></li>
+                    </ul>
+                </li>
+                <li class="has-dropdown not-click"><a href="#">Help</a>
+                    <ul class="dropdown noborder">
+                        <li><a href="#">How to add Add</a></li>
+                        <li><a id="608">How to edit category</a></li>
+                    </ul>
+                </li>
+                <li><a href="http://www.sistory.si/publikacije/?menuBottom=1">About</a></li>
+            </ul>
+        </section>
+    </nav>
 </div>
-<div class="main">
-    <div class="filters">
-        <div class="prefils"><select class="folder"></select></div>
-        <div class="prefils"><select class="item"></select></div>
-    </div>
-    <table class="items">
-        <thead>
-        <tr>
-            <th>Content</th>
-            <th>Preview</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td colspan="2" class="dataTables_empty">No data available</td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="viewActions">
-        <input id="btnPreview" type="button" class="w8-button yellow" value="Preview" />
-        <input id="btnSave" type="button" class="w8-button green" value="Save" />
-    </div>
+
+<section class="breadcrumbs-section" style="display: none;"></section>
+
+<section class="main-content">
+	<div class="contents">
+		<div id="sub" style="display: none;">
+			<div class="subtitle">
+				hello
+			</div>
+			<div style="height: 1.4em;"></div>	
+		</div>
+		<div class="table-row">
+			<div class="inputarea js-hitarea">
+			    <ul class="search-tags js-search-tags">
+			        <li class="search-input-item">
+			        	<input class="search-input js-search-input js-placeholder" type="text" name="q" placeholder="Search adds" autocomplete="off" style="width: 604px;">
+			    	</li>
+			    </ul>
+			</div>
+			<button style="display: table-cell; margin-bottom: 0; margin: 0 3px;" class="button" type="button">?</button>
+			<button style="display: table-cell; margin-bottom: 0;" class="button dropdown" type="button" data-toggle="example-dropdown-1">Category</button>
+			<div class="dropdown-pane" style="padding: 0;" id="example-dropdown-1" data-dropdown data-hover="true" data-hover-pane="true">
+			  <ul id="categoryList" class="search-category">
+			  	<li>Foo 1</li>
+			  	<li>Bar 2</li>
+			  	<li>Yee 3</li>
+			  </ul>
+			</div>
+		</div>
+		<br>
+		<div class="strapline">
+			rest4php demo site
+		</div>
+	</div>
+</section>
+
+<section class="sub-menu"></section>
+
+<section class="section object-details"></section>
+
+<section class="collections">
+	<div class="grid-x grid-margin-x collectionsGrid">
+	  <div class="large-auto cell">
+	  	<div class="coll-item">
+	  		<div class="category-flag">Category 1</div>
+	  		<div class="inner"> <span class="title">Add 1</span> </div>
+			<div class="coll-image img1">
+			</div>
+	    </div>
+	  </div>
+	  <div class="large-auto cell">
+	  	<div class="coll-item">
+	  		<div class="category-flag">Category 2</div>
+	  		<div class="inner"> <span class="title">Add 2</span> </div>
+			<div class="coll-image img1">
+			</div>
+	    </div>
+	  </div>
+	  <div class="large-auto cell">
+	  	<div class="coll-item">
+	  		<div class="category-flag">Category 3</div>
+	  		<div class="inner"> <span class="title">Add 3</span> </div>
+			<div class="coll-image img1">
+			</div>
+	    </div>
+	  </div>
+	  <div class="large-auto cell">
+	  	<div class="coll-item">
+	  		<div class="category-flag">Category 4</div>
+	  		<div class="inner"> <span class="title">Add 4</span> </div>
+			<div class="coll-image img1">
+			</div>
+	    </div>
+	  </div>
+	</div>
+</section>	
+
+<div style="clear: both;"></div>
+
+<div class="border">
+	<div style="height: 20px;"></div>
+	<footer id="bottom">
+	    <div class="grid-x">
+	        <div class="large-4 medium-4 small-12 columns">
+
+	 			<div class="row">
+	                <div class="large-6 medium-6 small-6 columns">
+	                    <ul class="firstUL">
+	                        <li>
+	                            <h4 class="title">rest4php Framework</h4>
+	                            <p style="margin-right: 25px; text-align: justify; font-style: italic; font-size: x-small;">
+                                    PHP RESTful API example using built-in PHP OOP. Simple and minimalistic RESTful web service, with FrontController pattern,
+                                    simple RegExp customizable router and JSON renderer. Web service serves data in JSON format, and offers CRUD operations
+                                    on model behind.
+	                            </p>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="large-4 medium-4 small-12 columns">
+	            <div class="row">
+	                <div class="large-6 medium-6 small-6 columns">
+	                    <ul class="firstUL">
+	                        <li>
+	                            <h4 class="title">About framework</h4>
+	                            <ul class="no-bullet">
+	                                <li><a rel="nofollow" href="https://github.com/gustinmi/rest4php">Github page</a></li>
+	                                <li><a rel="nofollow" href="https://stackoverflow.com/users/1617366/mitja-gustin">Stackoverflow profile</a></li>
+	                                <li><a href="http://mitjagustin.com">My home page</a></li>
+	                            </ul>
+	                        </li>
+	                    </ul>
+	                </div>
+	                <div class="large-6 medium-6 small-6 columns">
+	                    <ul class="firstUL">
+	                        <li>
+	                            <h4 style="padding: 15px 0;" class="title">Other project</h4>
+	                            <ul class="no-bullet">
+	                                <li><a href="http://www.sistory.si/publikacije/?menuBottom=9">rest4java</a></li>
+	                                <li><a href="http://www.sistory.si/publikacije/?menuBottom=13">JavaSeleniumQuery</a></li>
+	                                <li><a href="http://www.sistory.si/publikacije/?menuBottom=8">Javastic</a></li>
+	                            </ul>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="large-4 medium-4 small-12 columns">
+	            <div class="row collapse">
+	                <h4 class="title">Register for updates</h4>
+	                  <input style="display: inline-block;width: 200px;" id="newsSubscribeEmail" type="email" placeholder="myemail@email.com">
+                      <input style="margin-left: -5px;" id="newsSubscribe" type="submit" href="#" class="postfix button yesicon_small" value="">
+	            </div>
+	            <div class="row collapse">
+	                <h4 class="title">Find me else where</h4>
+	                <img src="client/images/facebook.png">
+	                <img src="client/images/mail.png">
+	                <img src="client/images/twitter.png">
+	            </div>
+        </div>
+	    </div>
+	    <div id="bottomfoot">
+            <hr>
+            <div>© Copyright 2011-2017 Mitja Gustin</div>
+            <div style="height: 20px;"></div>
+	    </div>
+	</footer>
 </div>
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="js/init.js" type="text/javascript"></script>
-<script src="js/jqInit.js" type="text/javascript"></script>
-<script src="js/logger.js" type="text/javascript"></script>
-<script src="index.js" type="text/javascript"></script>
+
+<script src="client/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="client/js/vendor/foundation.min.js"></script>
+<script src="client/js/common.js"></script>
+<script src="client/js/data.js"></script>
+<script src="client/js/app.js"></script>
+<script src="client/js/breadcrumbs.js"></script>
+<script src="client/js/menu.js"></script>
+<script src="client/js/results.js"></script>
+<script src="client/js/item.js"></script>
+<script>
+  $(document).foundation();
+</script>
+<!-- 
+	Sources :  
+	micromodule system : https://toddmotto.com/writing-a-standalone-ajax-xhr-javascript-micro-library/
+-->
 </body>
 </html>

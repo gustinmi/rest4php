@@ -44,102 +44,29 @@ ALTER TABLE `adds`
 -- Data for demo
 --
 
-insert into categories values (null , 'food');
-insert into categories values (null , 'entertainment');
-insert into categories values (null , 'sport');
-insert into categories values (null , 'education');
-insert into categories values (null , 'fun');
-insert into categories values (null , 'school');
-insert into categories values (null , 'college');
-insert into categories values (null , 'children');
-insert into categories values (null , 'cars');
+insert into categories values (null , 'PHP');
+insert into categories values (null , 'Java');
+insert into categories values (null , 'Java JDBC');
+insert into categories values (null , 'Maven');
+insert into categories values (null , 'Build tools');
+insert into categories values (null , 'Javascript');
+insert into categories values (null , 'CSS3');
+insert into categories values (null , 'HTML5');
 
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '1',  'file 1', '<div> Ad 1</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '1',  'file 2', '<div> Ad 2</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '1',  'file 3', '<div> Ad 3</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '1',  'file 4', '<div> Ad 4</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '1',  'file 5', '<div> Ad 5</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '1',  'file 6', '<div> Ad 6</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '1',  'file 7', '<div> Ad 7</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '1',  'file 8', '<div> Ad 8</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '1',  'file 9', '<div> Ad 9</div>');
 
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '2',  'file 1', '<div> Ad 1</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '2',  'file 2', '<div> Ad 2</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '2',  'file 3', '<div> Ad 3</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '2',  'file 4', '<div> Ad 4</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '2',  'file 5', '<div> Ad 5</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '2',  'file 6', '<div> Ad 6</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '2',  'file 7', '<div> Ad 7</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '2',  'file 8', '<div> Ad 8</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '2',  'file 9', '<div> Ad 9</div>');
-
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '3',  'file 1', '<div> Ad 1</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '3',  'file 2', '<div> Ad 2</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '3',  'file 3', '<div> Ad 3</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '3',  'file 4', '<div> Ad 4</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '3',  'file 5', '<div> Ad 5</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '3',  'file 6', '<div> Ad 6</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '3',  'file 7', '<div> Ad 7</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '3',  'file 8', '<div> Ad 8</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '3',  'file 9', '<div> Ad 9</div>');
-
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '4',  'file 1', '<div> Ad 1</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '4',  'file 2', '<div> Ad 2</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '4',  'file 3', '<div> Ad 3</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '4',  'file 4', '<div> Ad 4</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '4',  'file 5', '<div> Ad 5</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '4',  'file 6', '<div> Ad 6</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '4',  'file 7', '<div> Ad 7</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '4',  'file 8', '<div> Ad 8</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '4',  'file 9', '<div> Ad 9</div>');
-
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '5',  'file 1', '<div> Ad 1</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '5',  'file 2', '<div> Ad 2</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '5',  'file 3', '<div> Ad 3</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '5',  'file 4', '<div> Ad 4</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '5',  'file 5', '<div> Ad 5</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '5',  'file 6', '<div> Ad 6</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '5',  'file 7', '<div> Ad 7</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '5',  'file 8', '<div> Ad 8</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '5',  'file 9', '<div> Ad 9</div>');
-
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '6',  'file 1', '<div> Ad 1</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '6',  'file 2', '<div> Ad 2</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '6',  'file 3', '<div> Ad 3</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '6',  'file 4', '<div> Ad 4</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '6',  'file 5', '<div> Ad 5</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '6',  'file 6', '<div> Ad 6</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '6',  'file 7', '<div> Ad 7</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '6',  'file 8', '<div> Ad 8</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '6',  'file 9', '<div> Ad 9</div>');
-
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '7',  'file 1', '<div> Ad 1</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '7',  'file 2', '<div> Ad 2</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '7',  'file 3', '<div> Ad 3</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '7',  'file 4', '<div> Ad 4</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '7',  'file 5', '<div> Ad 5</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '7',  'file 6', '<div> Ad 6</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '7',  'file 7', '<div> Ad 7</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '7',  'file 8', '<div> Ad 8</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '7',  'file 9', '<div> Ad 9</div>');
-
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '8',  'file 1', '<div> Ad 1</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '8',  'file 2', '<div> Ad 2</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '8',  'file 3', '<div> Ad 3</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '8',  'file 4', '<div> Ad 4</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '8',  'file 5', '<div> Ad 5</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '8',  'file 6', '<div> Ad 6</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '8',  'file 7', '<div> Ad 7</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '8',  'file 8', '<div> Ad 8</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '8',  'file 9', '<div> Ad 9</div>');
-
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '9',  'file 1', '<div> Ad 1</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '9',  'file 2', '<div> Ad 2</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '9',  'file 3', '<div> Ad 3</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '9',  'file 4', '<div> Ad 4</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '9',  'file 5', '<div> Ad 5</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '9',  'file 6', '<div> Ad 6</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '9',  'file 7', '<div> Ad 7</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '9',  'file 8', '<div> Ad 8</div>');
-INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '9',  'file 9', '<div> Ad 9 </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '1',  'Autoloader', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '1',  'JSON Creation', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '2',  'Final everything ', '<div> Ad 2</div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '2',  'Conditional compilation', '<div> Ad 2</div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '3',  'Prepared statements', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '3',  'Transactions', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '4',  'Multi module project', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '4',  'Documentation site', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '5',  'Gulp', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '5',  'MAKE', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '6',  'jQuery', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '6',  'Prototypal inheritance', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '7',  'Box model', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '7',  'Media queries', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '8',  'Semantic tags', '<div> Desc </div>');
+INSERT INTO  `adds` (`id` , `folder_id` , `name`, `content` ) VALUES (NULL ,  '8',  'Head section', '<div> Desc </div>');

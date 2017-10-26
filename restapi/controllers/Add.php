@@ -17,7 +17,7 @@ class Add extends Controller implements ICrud {
         if (isset($id)){
             $q = "SELECT id, name, content, folder_id FROM adds where id = " . mysqli_real_escape_string($this->link, $id);
         }else{
-            $q = "SELECT id, name, content, folder_id FROM adds LIMIT 1, 10";
+            $q = "SELECT a.name, c.name FROM adds a, categories c WHERE a.folder_id = c.id order by c.name desc LIMIT 0,4";
         }
         $this->log($q);
         $result = mysqli_query($this->link, $q);
@@ -27,8 +27,10 @@ class Add extends Controller implements ICrud {
             $el = array();
             array_push($el, $row[0]);
             array_push($el, $row[1]);
-            array_push($el, htmlentities($row[2]));
-            array_push($el, $row[3]);
+            if (isset($id)){
+                array_push($el, htmlentities($row[2]));
+                array_push($el, $row[3]);
+            }
             array_push($allRows, $el);
         }
         $resp = $this->renderResponse($allRows);
